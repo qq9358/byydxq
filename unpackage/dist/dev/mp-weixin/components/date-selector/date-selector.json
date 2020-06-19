@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "calendar": "/components/calendar/calendar"
+  },
+  "component": true
+}

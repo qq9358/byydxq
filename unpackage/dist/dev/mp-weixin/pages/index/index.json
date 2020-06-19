@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "uni-popup": "/components/uni-popup/uni-popup",
+    "ticket-type-description": "/components/ticket-type-description/ticket-type-description"
+  }
+}

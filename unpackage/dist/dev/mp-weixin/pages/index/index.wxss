@@ -1,0 +1,201 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.view-index {
+  font-size: 14px;
+}
+.view-index .view-swiper .swiper {
+    height: 210px;
+}
+.view-index .view-swiper .swiper .swiper-item {
+      height: 100%;
+}
+.view-index .view-swiper .swiper .uni-bg-red {
+      background-color: #ff0000;
+}
+.view-index .view-swiper .swiper .uni-bg-green {
+      background-color: #4cd964;
+}
+.view-index .view-swiper .swiper .uni-bg-blue {
+      background-color: #007aff;
+}
+.view-index .view-swiper .swiper .image-swiper {
+      width: 100%;
+      height: 100%;
+}
+.view-index .scenic-event {
+    padding: 7px 15px;
+    color: #ff2f39;
+    border-bottom: 1px solid #dbdbdb;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    background-color: #ffffff;
+}
+.view-index .scenic-event .icon-gonggao {
+      margin-right: 5px;
+      font-size: 14px;
+}
+.view-index .scenic-ext {
+    padding: 13px 15px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+            align-items: center;
+    background-color: #ffffff;
+}
+.view-index .scenic-ext-title {
+      font-size: 15px;
+}
+.view-index .scenic-ext-title ._span {
+        margin-right: 5px;
+}
+.view-index .scenic-ext-word {
+      margin-top: 8px;
+      line-height: 13px;
+      font-size: 12px;
+      color: #999;
+}
+.view-index .scenic-ext .iconfont {
+      font-size: 14px;
+}
+.view-index .scenic-more {
+    text-align: right;
+    line-height: 24px;
+    color: #999;
+}
+.view-index .scenic-more ._span {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 6px;
+      height: 18px;
+      line-height: 18px;
+      font-size: 13px;
+}
+.view-index .scenic-more .iconfont {
+      vertical-align: middle;
+      font-size: 14px;
+}
+.view-index .view-introduction {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    padding: 13px 15px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    font-size: 15px;
+    background-color: #fff;
+}
+.view-index .view-introduction .introduction-active {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+              justify-content: space-between;
+      color: #999;
+}
+.view-index .view-introduction .introduction-active .icon-arrow {
+        font-size: 20px;
+}
+.view-index .view-categorys .view-category {
+    margin-top: 10px;
+    background: #fff;
+}
+.view-index .view-categorys .view-category .category-header {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      padding: 8px 15px;
+      border-bottom: 1px solid #dbdbdb;
+      font-size: 17px;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+              align-items: center;
+}
+.view-index .view-categorys .view-category .category-header .icon-menpiao {
+        padding: 1px 3px 0px 3px;
+        background-color: #ff7d13;
+        border-radius: 25px;
+        line-height: 1.5;
+        color: #ffffff;
+        font-size: 12px;
+        height: 19px;
+        margin-right: 7px;
+}
+.view-index .view-categorys .view-category .category-body .view-items {
+      padding: 10px 13px 10px 0px;
+      margin-left: 15px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+              justify-content: space-between;
+      border-bottom: 1px solid #dbdbdb;
+}
+.view-index .view-categorys .view-category .category-body .view-items .item-content .item-name {
+        margin-bottom: 5px;
+        padding-right: 0;
+        line-height: 18px;
+        font-size: 14px;
+        color: #000;
+        text-overflow: ellipsis;
+        overflow: hidden;
+}
+.view-index .view-categorys .view-category .category-body .view-items .item-content .item-status {
+        color: #099fde;
+        font-size: 11px;
+        padding: 0px 0px 7px 0px;
+}
+.view-index .view-categorys .view-category .category-body .view-items .item-content .item-explain {
+        font-size: 12px;
+        color: #999;
+        height: 21px;
+        line-height: 21px;
+}
+.view-index .view-categorys .view-category .category-body .view-items .item-active .view-price {
+        font-size: 20px;
+        font-style: normal;
+        color: #f40;
+        text-align: right;
+        overflow: hidden;
+        word-break: break-all;
+        font-weight: 400;
+}
+
