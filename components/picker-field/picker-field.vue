@@ -3,7 +3,7 @@
 		<text class="input-label">{{ label }}</text>
 		<!-- <input v-if="isCell" :title="label" is-link :value="currentText ? currentText : placeholder" @click="onClick" />
 		<input v-else :label="label" :value="currentText" :placeholder="placeholder" right-icon="arrow" readonly @focus="onFocus" @click="onClick" /> -->
-		<!-- <uni-popup ref="pickerPopup" position="bottom"> -->
+		<!-- <tui-bottom-popup ref="pickerPopup" position="bottom"> -->
 		<!-- <picker
 				show-toolbar
 				:columns="columns"
@@ -15,7 +15,7 @@
 				:value="index"
 				:range="columns"
 			>
-				<view class="uni-input">{{ columns[index] }}</view>
+				<view class="tui-input">{{ columns[index] }}</view>
 			</picker> -->
 		<picker @change="pickerChange" :value="selectValue" :range="columns" range-key="displayText">
 			<view class="picker-view">
@@ -24,7 +24,7 @@
 				<view><view class="iconfont icon-arrow picker-icon"></view></view>
 			</view>
 		</picker>
-		<!-- </uni-popup> -->
+		<!-- </tui-bottom-popup> -->
 	</view>
 </template>
 

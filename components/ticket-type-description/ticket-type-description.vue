@@ -1,5 +1,5 @@
 <template>
-	<uni-popup ref="descriptionPopup" type="bottom" @change="popupChange">
+	<tui-bottom-popup ref="descriptionPopup" type="bottom" @change="popupChange">
 		<div class="view-popup description">
 			<div class="popup-header">
 				<div>购买须知</div>
@@ -49,7 +49,7 @@
 				</view>
 			</div>
 		</div>
-	</uni-popup>
+	</tui-bottom-popup>
 </template>
 
 <script>

@@ -1,5 +1,13 @@
 <template>
 	<view class="view-index">
+		<view
+			v-if="selectColors.length > 1"
+			class="view-gradient"
+			:style="{ background: `linear-gradient(to bottom right, ${selectColors[selectColors.length - 2]}, ${selectColors[selectColors.length - 1]})` }"
+		>
+			<view class="view-style"><img class="style-img" :src="indexHeaderStyleUrl" /></view>
+			<view class="gradient-view"><img class="gradient-img" :src="imgUrl" /></view>
+		</view>
 		<view class="view-swiper">
 			<swiper class="swiper" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval" :duration="swiper.duration">
 				<swiper-item v-for="(imageItem, index) in images" :key="index"><image :src="imageItem" class="image-swiper"></image></swiper-item>
@@ -26,14 +34,14 @@
 				<text class="iconfont icon-arrow"></text>
 			</view>
 		</view>
-		<uni-popup ref="introductionPopup" type="bottom">
+		<tui-bottom-popup ref="introductionPopup" type="bottom">
 			<view class="view-popup">
 				<view class="popup-header"><text>IntroductionTitle</text></view>
 				<view class="popup-body">
 					<view class="body-content"><text>IntroductionBody</text></view>
 				</view>
 			</view>
-		</uni-popup>
+		</tui-bottom-popup>
 		<view class="view-categorys">
 			<view v-for="category in categorys" :key="category.id" class="view-category">
 				<view class="category-header">
@@ -145,7 +153,8 @@ export default {
 			shareImgUrl: '',
 			groundId: 1,
 			showDescription: false,
-			screenWidth: 0
+			screenWidth: 0,
+			selectColors: ['#254334', '#6f907e']
 		};
 	},
 	computed: {
@@ -279,7 +288,32 @@ export default {
 <style lang="scss">
 .view-index {
 	font-size: 14px;
-
+	.view-gradient {
+		height: 163px;
+		width: 280px;
+		margin: 20px auto 0;
+		padding: 0px 10px 0px 10px;
+		border-bottom-right-radius: 20px;
+		border-bottom-left-radius: 20px;
+		.view-style {
+			overflow: hidden;
+			height: 80px;
+			.style-img {
+				width: 100%;
+			}
+			.gradient-view {
+				width: 280px;
+				height: 120px;
+				border-radius: 6px;
+				overflow: hidden;
+				margin-top: -21px;
+				.gradient-img {
+					width: 100%;
+					height: 100%;
+				}
+			}
+		}
+	}
 	.view-swiper {
 		.swiper {
 			height: 210px;
@@ -288,15 +322,15 @@ export default {
 				height: 100%;
 			}
 
-			.uni-bg-red {
+			.tui-bg-red {
 				background-color: #ff0000;
 			}
 
-			.uni-bg-green {
+			.tui-bg-green {
 				background-color: #4cd964;
 			}
 
-			.uni-bg-blue {
+			.tui-bg-blue {
 				background-color: #007aff;
 			}
 
@@ -343,8 +377,8 @@ export default {
 			font-size: 12px;
 			color: #999;
 		}
-		
-		.iconfont{
+
+		.iconfont {
 			font-size: 14px;
 		}
 	}

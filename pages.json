@@ -45,9 +45,15 @@
 			"enablePullDownRefresh": true
 		}
 	}],
+	"easycom": {
+		"autoscan": true,
+		"custom": {
+			"tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue"
+		}
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "uni-app",
+		"navigationBarTitleText": "tui-app",
 		"navigationBarBackgroundColor": "#19a0f0",
 		"backgroundColor": "#FFFFFF"
 	},

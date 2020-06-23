@@ -1,5 +1,5 @@
 <template>
-  <uni-popup ref="notice-popup" v-model="show" position="bottom">
+  <tui-bottom-popup ref="notice-popup" v-model="show" position="bottom">
     <view class="description">
       <view class="description-title">
         <view>景区公告</view>
@@ -16,7 +16,7 @@
         </view>
       </view>
     </view>
-  </uni-popup>
+  </tui-bottom-popup>
 </template>
 
 <script>

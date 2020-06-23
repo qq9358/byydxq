@@ -28,7 +28,7 @@
 							<span>¥</span>
 							{{ price }}
 						</view>
-						<view class="booking-mod-around-num"><uni-number-box v-model="quantity" :min="minBuyNum" :max="maxBuyNum" integer @change="onQuantityChange" /></view>
+						<view class="booking-mod-around-num"><tui-numberbox v-model="quantity" :min="minBuyNum" :max="maxBuyNum" integer @change="onQuantityChange" /></view>
 					</view>
 				</view>
 				<p v-if="false" class="booking-mod-around-tips">景区统一限购，同一手机号1天内在所有网络平台最多只能预订5份。如您需要重复购买，请使用其他手机号购买。</p>
@@ -149,7 +149,7 @@
 
 		<ticket-type-description v-model="showDescription" :show-buy="false" :ticket-type-id="ticketType.id" :ticket-type-name="ticketType.name" :price="price" />
 
-		<uni-popup ref="touristPopup" v-if="ticketType.touristInfoType == 3" position="right">
+		<tui-bottom-popup ref="touristPopup" v-if="ticketType.touristInfoType == 3" position="right">
 			<view class="booking-tourist-edit">
 				<van-nav-bar :title="`${editTouristTitle}出行人`" left-text="返回" left-arrow @click-left="showTourist = false" />
 				<view class="booking-tourist-edit-content">
@@ -161,7 +161,7 @@
 					<view class="booking-tourist-edit-btnbox"><van-button @click="onTouristSave">完成</van-button></view>
 				</view>
 			</view>
-		</uni-popup>
+		</tui-bottom-popup>
 	</view>
 </template>
 
@@ -682,11 +682,11 @@ export default {
 			}
 
 			&-num {
-				.uni-number-box {
+				.tui-numberbox {
 					display: flex;
 				}
 
-				/deep/ .uni-number-box__input {
+				/deep/ .tui-numberbox__input {
 					margin: 0;
 					height: 33px;
 				}
@@ -807,7 +807,7 @@ export default {
 		overflow: hidden;
 	}
 
-	.uni-numbox {
+	.tui-numbox {
 		width: 111px;
 	}
 }

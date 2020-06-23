@@ -6,7 +6,7 @@
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
-        "nvueCompiler" : "uni-app",
+        "nvueCompiler" : "tui-app",
         "compilerVersion" : 3,
         "modules" : {},
         "distribute" : {

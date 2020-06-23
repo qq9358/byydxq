@@ -189,7 +189,7 @@ export default {
       }
       // #ifdef H5
       /deep/ {
-        & .uni-scroll-view > div {
+        & .tui-scroll-view > div {
           height: 100%;
         }
       }

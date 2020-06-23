@@ -32,9 +32,9 @@
 				</view>
 			</view>
 		</view>
-		<uni-popup ref="calendarPopup" type="bottom">
+		<tui-bottom-popup :show="showDateTimePicker" type="bottom">
 			<calendar :ago-day-hide="minDateTime" :future-day-hide="maxDateTime" :prices="dates" :disabled-weeks="disabledWeeks" @choseDay="confirmMoreDate"></calendar>
-		</uni-popup>
+		</tui-bottom-popup>
 	</view>
 </template>
 
