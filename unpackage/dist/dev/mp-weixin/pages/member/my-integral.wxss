@@ -1,0 +1,428 @@
+@charset "UTF-8";
+/**
+ * scss预处理 内置的常用样式变量
+ * 后期项目会考虑使用scss
+*/
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.view-my-integral .tui-header .tui-header-bottom .tui-bottom-item .icon-angle {
+  font-size: 12px;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  padding: 2px 0px 0px 2px;
+}
+.view-my-integral .view-integral-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  background: #f0f0f0;
+  padding: 20px 25px 20px 25px;
+}
+.view-my-integral .view-integral-info .integral-info-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  font-size: 14px;
+}
+.view-my-integral .view-integral-info .integral-info-item .integral-info-num {
+  color: #fe7418;
+  font-weight: bold;
+}
+.view-my-integral .view-integral-list .integral-list-item {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  font-family: pingfang;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-icon {
+  padding: 20px 20px 20px 20px;
+  width: 23px;
+  height: 23px;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-icon .item-icon-view {
+  background: #fe7c18;
+  border-radius: 50%;
+  padding: 11px 11px 11px 11px;
+  width: 100%;
+  height: 100%;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-icon .item-icon-view .item-icon-img {
+  height: 100%;
+  width: 100%;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-content {
+  border-bottom: 1px solid #dbdbdb;
+  padding: 20px 20px 20px 0px;
+  width: calc(100% - 97px);
+  margin-left: 24px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-content .item-content-text .content-text-purpose {
+  font-size: 15px;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-content .item-content-text .content-text-ctime {
+  font-size: 13px;
+  color: #999999;
+  padding: 5px 0px 0px 0px;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-value .item-value-positive {
+  color: #fe7418;
+}
+.view-my-integral .view-integral-list .integral-list-item .list-item-value .item-value-negative {
+  color: #424242;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 隐藏scroll-view滚动条*/
+::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+	color: transparent;
+}
+/*header*/
+.tui-header {
+	width: 100%;
+	/* box-shadow: 0 15rpx 10rpx -15rpx #f2f2f2; */
+	box-sizing: border-box;
+	background-image: -webkit-linear-gradient(left, #009eff, #00d0ff);
+	position: fixed;
+	z-index: 1000;
+	color: #ffffff;
+}
+.tui-header-bottom {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	font-size: 26rpx;
+}
+.tui-bottom-item {
+	margin-left: 6rpx;
+}
+.tui-header-bottom {
+	height: 80rpx;
+	padding: 0 30rpx;
+	box-sizing: border-box;
+	font-size: 28rpx;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	overflow: hidden;
+}
+.tui-bottom-text {
+	line-height: 24rpx;
+}
+.tui-bottom-item {
+	-webkit-box-flex: 0.2;
+	-webkit-flex: 0.2;
+	        flex: 0.2;
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: inline-flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	padding: 18rpx 12rpx;
+	border-radius: 40rpx;
+	box-sizing: border-box;
+	/* background: #f2f2f2; */
+	margin-right: 20rpx;
+	white-space: nowrap;
+}
+.tui-bottom-item:last-child {
+	margin-right: 0;
+}
+.tui-ml {
+	margin-left: 6rpx;
+}
+/*header*/
+/*header 下拉选择*/
+.tui-drop-input-box {
+	padding: 80rpx 50rpx 0rpx 50rpx;
+	box-sizing: border-box;
+}
+.tui-selected-list {
+	background-color: #fff;
+	border-radius: 20rpx;
+	overflow: hidden;
+	-webkit-transform: translateZ(0);
+	        transform: translateZ(0);
+}
+.tui-dropdown-scroll {
+	height: 400rpx;
+}
+/* 下拉选择 */
+

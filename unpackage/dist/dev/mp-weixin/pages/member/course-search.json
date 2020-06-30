@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "上课记录查询",
+  "usingComponents": {
+    "tui-top-dropdown": "/components/thorui/tui-top-dropdown/tui-top-dropdown",
+    "tui-icon": "/components/thorui/tui-icon/tui-icon"
+  }
+}

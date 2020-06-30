@@ -3,7 +3,7 @@
  *
  * github地址: https://github.com/dcloudio/uParse
  *
- * tui-app框架下 富文本解析
+ * uni-app框架下 富文本解析
  * 
  */-->
 

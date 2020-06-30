@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "tui-toast": "/components/thorui/tui-toast/tui-toast"
+  }
+}

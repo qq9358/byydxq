@@ -1,0 +1,1 @@
+.picker-view{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-align:center;-webkit-align-items:center;align-items:center;color:#969799}.picker-view .display-text{width:calc(100vw - 162px)}.picker-view .select-text{color:#333}.picker-view .picker-icon{font-size:22px}

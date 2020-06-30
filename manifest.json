@@ -34,18 +34,42 @@
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "abiFilters" : [ "armeabi-v7a", "x86" ]
             },
             "ios" : {},
-            "sdkConfigs" : {}
+            "sdkConfigs" : {
+                "ad" : {}
+            }
         }
     },
     "quickapp" : {},
     "mp-weixin" : {
         "appid" : "wx6b88b58124b3f2b3",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true
         },
         "permission" : {}
+    },
+    "h5" : {
+        "title" : "冰场管理系统",
+        "router" : {
+            "mode" : "history",
+            "base" : ""
+        },
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : "HFJBZ-3OH3G-46FQI-IS6R7-F4UYH-2KFJW"
+                }
+            }
+        },
+        "template" : "template.h5.html",
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "你的位置信息将用于小程序位置接口的效果展示"
+            }
+        }
     }
 }

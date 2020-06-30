@@ -20,7 +20,7 @@
 	font-size: 1em;
 	text-align:justify;/* //左右两端对齐 */
 }
-.wxParse view ,.wxParse tui-view{
+.wxParse view ,.wxParse uni-view{
 	word-break: break-word;
 }
 .wxParse .p {
@@ -152,7 +152,7 @@
 .wxParse .video-video {
   width: 100%;
 }
-.wxParse .tui-image{
+.wxParse .uni-image{
 	max-width: 100%;
 }
 .wxParse .img {
@@ -253,6 +253,6 @@
 	border: 2upx solid #dadada;
 	overflow:auto;
 }
-.wxParse .audio, .wxParse .tui-audio-default{
+.wxParse .audio, .wxParse .uni-audio-default{
 	display: block;
 }

@@ -1,0 +1,1 @@
+.no-data{color:#696969;text-align:center;height:calc(100vh - 170px);display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;align-items:center}.no-data-icon{font-size:40px}.no-data-text{font-size:13px;margin-top:5px}

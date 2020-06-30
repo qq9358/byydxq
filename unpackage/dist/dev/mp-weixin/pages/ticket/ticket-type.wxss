@@ -1,0 +1,204 @@
+@charset "UTF-8";
+/**
+ * scss预处理 内置的常用样式变量
+ * 后期项目会考虑使用scss
+*/
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.view-ticket-type .image-swiper {
+  height: 200px;
+}
+.view-ticket-type .image-swiper .view-image .image-view {
+  height: 100%;
+  width: 100%;
+}
+.view-ticket-type .image-swiper .view-image .image-view .ice-image {
+  width: 100%;
+  height: 100%;
+}
+.view-ticket-type .image-swiper .view-image .image-text {
+  width: 100%;
+  position: absolute;
+  top: 150px;
+}
+.view-ticket-type .image-swiper .view-image .image-text .text-view {
+  text-align: center;
+  padding: 0px 4px 1px 11px;
+  background: #adadad;
+  color: #ffffff;
+  border-radius: 25px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+.view-ticket-type .view-ticket {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  overflow: hidden;
+  margin-top: -15px;
+  position: absolute;
+  background: #ffffff;
+  width: 100%;
+  padding: 20px 0px 15px 0px;
+}
+.view-ticket-type .view-ticket .ticket-title {
+  font-size: 23px;
+  padding: 0px 15px 0px 15px;
+}
+.view-ticket-type .view-ticket .ticket-explain {
+  padding: 2px 15px 10px 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 12px;
+  color: #008ee5;
+}
+.view-ticket-type .view-ticket .ticket-explain .explain-tap {
+  background: #d1eeff;
+  padding: 1px 8px 1px 8px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+.view-ticket-type .view-ticket .ticket-explain .explain-introduction {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0px 0px 0px 6px;
+}
+.view-ticket-type .view-ticket .ticket-explain .explain-introduction .introduction-icon {
+  padding: 0px 0px 0px 2px;
+}
+.view-ticket-type .view-ticket .ticket-explain .explain-introduction .introduction-icon .introduction-right-img {
+  width: 9px;
+  height: 10px;
+}
+.view-ticket-type .view-ticket .ticket-map {
+  border-top: 1px solid #dbdbdb;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 12px;
+  padding: 15px 15px 0px 15px;
+  color: #666666;
+}
+.view-ticket-type .view-ticket .ticket-map .iconfont {
+  color: #666666;
+}
+.view-ticket-type .view-ticket .ticket-map .icon-location {
+  font-size: 14px;
+}
+.view-ticket-type .view-ticket .ticket-map .icon-arrow {
+  font-size: 12px;
+}
+.view-ticket-type .view-ticket .ticket-map .location-text {
+  padding: 0px 2px 0px 2px;
+  width: calc(100% - 60px);
+}
+.view-ticket-type .view-ticket .view-ticket-type {
+  padding: 15px 0px 0px 0px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view {
+  border-top: 1px solid #dbdbdb;
+  padding: 15px 15px 10px 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-type-title {
+  font-size: 17px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-status-view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 12px;
+  padding: 7px 0px 7px 0px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-status-view .trave-date-text {
+  color: #00b994;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-status-view .status-take {
+  color: #666666;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-status-view .status-separate {
+  border-right: 1px solid #666666;
+  width: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
+  height: 12px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-introduction {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-introduction .introduction-tap {
+  color: #ffffff;
+  font-size: 12px;
+  padding: 0px 7px 0px 7px;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background: -webkit-linear-gradient(left, #1ea9ff, #0fc5e2);
+  background: linear-gradient(to right, #1ea9ff, #0fc5e2);
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-left .ticket-introduction .introduction-link {
+  padding: 0px 0px 0px 8px;
+  color: #666666;
+  font-size: 13px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-right {
+  text-align: center;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-right .ticket-price-view {
+  color: #ff6200;
+  padding: 0px 0px 5px 0px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-right .ticket-price-view .ticket-price-symbol {
+  font-size: 12px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-right .ticket-price-view .ticket-price-value {
+  font-size: 20px;
+}
+.view-ticket-type .view-ticket .view-ticket-type .ticket-type-view .ticket-type-right .book-button {
+  border-radius: 25px;
+  padding: 7px 13px 7px 13px;
+  background: -webkit-linear-gradient(left, #fc5417, #fe7d18);
+  background: linear-gradient(to right, #fc5417, #fe7d18);
+}
+
+
+.text-view {
+	width: 160rpx;
+}
+

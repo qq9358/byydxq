@@ -1,0 +1,1 @@
+<view class="_div"><tui-bottom-popup vue-id="5738877c-1" show="{{value}}" data-event-opts="{{[['^close',[['onClose']]]]}}" bind:close="__e" bind:__l="__l" vue-slots="{{['default']}}"><view class="popup-div _div">这是公告详情</view></tui-bottom-popup></view>

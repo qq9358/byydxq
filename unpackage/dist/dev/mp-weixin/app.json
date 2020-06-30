@@ -2,8 +2,12 @@
   "pages": [
     "pages/index/index",
     "pages/ticket/buy-ticket",
+    "pages/ticket/ticket-type",
     "pages/order/order",
     "pages/member/member-center",
+    "pages/member/course-search",
+    "pages/member/my-integral",
+    "pages/member/message-list",
     "pages/payment/wx-js-pay",
     "pages/order/order-detail",
     "pages/member/my-ticket",
@@ -11,9 +15,9 @@
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#19a0f0",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "冰块管理系统",
+    "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#FFFFFF"
   },
   "tabBar": {
@@ -24,25 +28,24 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "static/image/home.png",
-        "selectedIconPath": "static/image/home-blue.png",
+        "iconPath": "static/images/tabbar/home.png",
+        "selectedIconPath": "static/images/tabbar/home-blue.png",
         "text": "主页"
       },
       {
         "pagePath": "pages/order/order",
-        "iconPath": "static/image/cate.png",
-        "selectedIconPath": "static/image/cate-blue.png",
+        "iconPath": "static/images/tabbar/cate.png",
+        "selectedIconPath": "static/images/tabbar/cate-blue.png",
         "text": "订单"
       },
       {
         "pagePath": "pages/member/member-center",
-        "iconPath": "static/image/user.png",
-        "selectedIconPath": "static/image/user-blue.png",
+        "iconPath": "static/images/tabbar/user.png",
+        "selectedIconPath": "static/images/tabbar/user-blue.png",
         "text": "我"
       }
     ]
   },
   "permission": {},
-  "usingComponents": {},
-  "sitemapLocation": "sitemap68.json"
+  "usingComponents": {}
 }
