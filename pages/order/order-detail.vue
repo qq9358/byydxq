@@ -70,7 +70,7 @@
 									<span class="order-detail-list-text">
 										<span>凭</span>
 										<span v-if="detail.hasTicket">以下</span>
-										<span>二维码直接检票入园</span>
+										<span>二维码换腕带卡进场</span>
 									</span>
 								</p>
 								<div v-if="detail.hasTicket">
@@ -434,6 +434,7 @@ export default {
 
 		button {
 			height: 45px;
+			line-height: 45px;
 			width: 30%;
 			font-size: 18px;
 			padding: 0;

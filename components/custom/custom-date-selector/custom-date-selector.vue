@@ -32,9 +32,15 @@
 				</view>
 			</view>
 		</view>
-		<tui-bottom-popup :show="showDateTimePicker" type="bottom">
-			<calendar :ago-day-hide="minDateTime" :future-day-hide="maxDateTime" :prices="dates" :disabled-weeks="disabledWeeks" @choseDay="confirmMoreDate"></calendar>
-		</tui-bottom-popup>
+		<uni-popup ref="popup" @chang="cancelMoreDate" type="bottom">
+			<custom-calendar
+				:ago-day-hide="minDateTime"
+				:future-day-hide="maxDateTime"
+				:prices="dates"
+				:disabled-weeks="disabledWeeks"
+				@choseDay="confirmMoreDate"
+			></custom-calendar>
+		</uni-popup>
 	</view>
 </template>
 
@@ -47,8 +53,7 @@ export default {
 	name: 'date-selector',
 	data() {
 		return {
-			selectedDate: this.value,
-			showDateTimePicker: false
+			selectedDate: this.value
 		};
 	},
 	props: {
@@ -165,16 +170,16 @@ export default {
 			this.$emit('input', this.selectedDate);
 		},
 		selectMoreDate() {
-			this.$refs.calendarPopup.open();
+			this.$refs.popup.open();
 		},
 		confirmMoreDate(value) {
-			this.$refs.calendarPopup.close();
+			this.$refs.popup.close();
 
 			this.selectedDate = dayjs(value).toDateString();
 			this.$emit('input', this.selectedDate);
 		},
 		cancelMoreDate() {
-			this.showDateTimePicker = false;
+			this.$refs.popup.close();
 		}
 	}
 };

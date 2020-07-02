@@ -1,6 +1,6 @@
 <template>
-	<view class="view-input">
-		<text class="input-label">{{ label }}</text>
+	<view class="view-input" >
+		<text class="picker-label">{{ label }}</text>
 		<!-- <input v-if="isCell" :title="label" is-link :value="currentText ? currentText : placeholder" @click="onClick" />
 		<input v-else :label="label" :value="currentText" :placeholder="placeholder" right-icon="arrow" readonly @focus="onFocus" @click="onClick" /> -->
 		<!-- <tui-bottom-popup ref="pickerPopup" position="bottom"> -->
@@ -17,7 +17,7 @@
 			>
 				<view class="tui-input">{{ columns[index] }}</view>
 			</picker> -->
-		<picker @change="pickerChange" :value="selectValue" :range="columns" range-key="displayText">
+		<picker v-if="pickerType == 1" @change="pickerChange" :value="selectValue" :range="columns" range-key="displayText">
 			<view class="picker-view">
 				<view v-if="selectValue == undefined" class="display-text">{{ placeholder }}</view>
 				<view v-else :class="{ 'select-text': selectValue != undefined, 'display-text': true }">{{ columns[selectValue].displayText }}</view>
@@ -63,6 +63,10 @@ export default {
 		isCell: {
 			type: Boolean,
 			default: false
+		},
+		pickerType: {
+			type: Number,
+			default: 1
 		}
 	},
 	data() {
@@ -101,7 +105,9 @@ export default {
 		onFocus() {
 		},
 		onClick() {
-			this.$refs.pickerPopup.open();
+			if(this.pickerType == 2){
+				this.$refs.dateTime.show();
+			}
 		},
 		onCancel() {
 			this.$refs.pickerPopup.close();
@@ -119,18 +125,4 @@ export default {
 </script>
 
 <style lang="scss">
-.picker-view {
-	display: flex;
-	align-items: center;
-	color: #969799;
-	.display-text {
-		width: calc(100vw - 162px);
-	}
-	.select-text {
-		color: #333;
-	}
-	.picker-icon {
-		font-size: 22px;
-	}
-}
 </style>

@@ -207,6 +207,7 @@
 		overflow: visible;
 		margin-left: 0;
 		margin-right: 0;
+		padding: 0px 0px;
 	}
 
 	.tui-modal-btn::after {

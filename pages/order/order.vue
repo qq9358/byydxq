@@ -1,12 +1,12 @@
 <template>
 	<view>
-		<s-tabs :effect="false" v-model="tabIndex" @change="tabClick" :nav-per-view="3" class="s-tabs" :height="88">
-			<s-tab title="全部"></s-tab>
-			<s-tab title="待付款"></s-tab>
-			<s-tab title="待使用"></s-tab>
-		</s-tabs>
+		<custom-tabs :effect="false" v-model="tabIndex" @change="tabClick" :nav-per-view="3" class="custom-tabs" :height="88">
+			<custom-tab title="全部"></custom-tab>
+			<custom-tab title="待付款"></custom-tab>
+			<custom-tab title="待使用"></custom-tab>
+		</custom-tabs>
 		<view style="margin-top:54px;">
-			<no-data v-if="dataLoaded && orders.length === 0" :content-height="contentHeight"></no-data>
+			<custom-no-data v-if="dataLoaded && orders.length === 0" :content-height="contentHeight"></custom-no-data>
 			<view v-else v-model="loading" :finished="finished" :immediate-check="false" @load="onLoad">
 				<view v-for="order in orders" :key="order.listNo" @click="onPanelClick(order.listNo)" class="panel">
 					<view class="panel-title">
@@ -155,13 +155,13 @@ export default {
 	}
 }
 
-.s-tab-wrap {
+.custom-tab-wrap {
 	height: 0rpx;
 	padding: 0rpx;
 	font-size: 28rpx;
 }
 
-.s-tabs {
+.custom-tabs {
 	position: fixed;
 	/* #ifndef MP */
 	top: 44px;

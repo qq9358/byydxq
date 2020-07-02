@@ -1,5 +1,5 @@
 let strategies = {
-  required: function(val, name) {
+  required: function (val, name) {
     let result = new ValidateResult();
     if (isNullOrEmpty(val)) {
       result.success = false;
@@ -9,7 +9,7 @@ let strategies = {
 
     return result;
   },
-  minLength: function(val, len, name) {
+  minLength: function (val, len, name) {
     let result = new ValidateResult();
     if (isNullOrEmpty(val)) {
       return result;
@@ -23,7 +23,7 @@ let strategies = {
 
     return result;
   },
-  maxLength: function(val, len, name) {
+  maxLength: function (val, len, name) {
     let result = new ValidateResult();
     if (isNullOrEmpty(val)) {
       return result;
@@ -37,7 +37,33 @@ let strategies = {
 
     return result;
   },
-  isMobile: function(val, name) {
+  minNum: function (val, num, name) {
+    let result = new ValidateResult();
+    if (isNullOrEmpty(val)) {
+      return result;
+    }
+    if (parseInt(val) < parseInt(num)) {
+      result.success = false;
+      result.message = name + "数值不能小于" + num;
+      return result;
+    }
+
+    return result;
+  },
+  maxNum: function (val, num, name) {
+    let result = new ValidateResult();
+    if (isNullOrEmpty(val)) {
+      return result;
+    }
+    if (parseInt(val) > parseInt(num)) {
+      result.success = false;
+      result.message = name + "数值不能大于" + num;
+      return result;
+    }
+
+    return result;
+  },
+  isMobile: function (val, name) {
     let result = new ValidateResult();
     if (isNullOrEmpty(val)) {
       return result;
@@ -52,7 +78,7 @@ let strategies = {
 
     return result;
   },
-  isIdCard: function(val, name) {
+  isIdCard: function (val, name) {
     let result = new ValidateResult();
     if (isNullOrEmpty(val)) {
       return result;
@@ -75,7 +101,25 @@ let strategies = {
     }
 
     if (val.length === 18) {
-      let weightingFactor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+      let weightingFactor = [
+        7,
+        9,
+        10,
+        5,
+        8,
+        4,
+        2,
+        1,
+        6,
+        3,
+        7,
+        9,
+        10,
+        5,
+        8,
+        4,
+        2
+      ];
       let total = 0;
       for (let i = 0; i < weightingFactor.length; i++) {
         total += weightingFactor[i] * val[i];
@@ -87,7 +131,8 @@ let strategies = {
     }
 
     return result;
-  }
+  },
+
 };
 
 function isNullOrEmpty(val) {
@@ -113,7 +158,7 @@ function ValidateResult() {
         }]
     }] */
 
-let validate = function(arr) {
+let validate = function (arr) {
   let result = new ValidateResult();
   for (let i = 0, l1 = arr.length; i < l1; i++) {
     let item = arr[i];

@@ -1,4 +1,37 @@
-.tui-modal .tui-modal__bd{
+view{
+	font-size: 14px;
+}
+
+.picker-label {
+	width: 90px;
+}
+
+.link-text {
+	color: #19a0f0;
+}
+
+.picker-view {
+	display: flex;
+	align-items: center;
+	color: #969799;
+	.display-text {
+		width: calc(100vw - 162px);
+	}
+	.select-text {
+		color: #333;
+	}
+	.picker-icon {
+		font-size: 22px;
+	}
+}
+
+.enter-button {
+	background: #19a0f0;
+	padding: 10px 6px 10px 6px;
+	border-radius: 5px;
+}
+
+.tui-modal .tui-modal__bd {
 	color: #333;
 }
 
@@ -11,8 +44,16 @@
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid #efefef;
+	font-size: 14px;
 	.input-label {
-		width: 96px;
+		width: 56px;
+		padding: 0px 34px 0px 0px;
+		text-align-last: justify;
+		text-align: justify;
+		text-justify: distribute-all-lines; // 这行必加，兼容ie浏览bai器
+	}
+	.input-end {
+		margin-left: auto;
 	}
 }
 
@@ -495,7 +536,7 @@ button {
 	padding: 5px 8px;
 }
 
-tui-button[type=primary][plain]{
+tui-button[type='primary'][plain] {
 	color: #19a0f0;
 	border-color: #19a0f0;
 }
@@ -529,8 +570,6 @@ button::after {
 	overflow: visible;
 }
 
-
-
 .tui-opcity {
 	opacity: 0.5;
 }
@@ -544,8 +583,6 @@ button::after {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-
-
 
 /*按钮样式*/
 

@@ -2,7 +2,7 @@
 	<view v-if="pageLoaded" ref="grbody" class="booking">
 		<view class="booking-mod">
 			<view class="booking-mod-hd"><text class="booking-mod-hd-title">使用日期</text></view>
-			<view class="booking-mod-bd"><date-selector v-model="input.travelDate" :dates="ticketType.dailyPrices"></date-selector></view>
+			<view class="booking-mod-bd"><custom-date-selector v-model="input.travelDate" :dates="ticketType.dailyPrices"></custom-date-selector></view>
 		</view>
 
 		<view class="booking-mod">
@@ -28,26 +28,25 @@
 							<span>¥</span>
 							{{ price }}
 						</view>
-						<view class="booking-mod-around-num"><tui-numberbox v-model="quantity" :min="minBuyNum" :max="maxBuyNum" integer @change="onQuantityChange" /></view>
+						<view class="booking-mod-around-num"><tui-numberbox :value="quantity" :min="minBuyNum" :max="maxBuyNum" integer @change="onQuantityChange" /></view>
 					</view>
 				</view>
-				<p v-if="false" class="booking-mod-around-tips">景区统一限购，同一手机号1天内在所有网络平台最多只能预订5份。如您需要重复购买，请使用其他手机号购买。</p>
+				<p v-if="false" class="booking-mod-around-tips">
+					{{ pageLabelMainText }}统一限购，同一手机号1天内在所有网络平台最多只能预订5份。如您需要重复购买，请使用其他手机号购买。
+				</p>
 			</view>
 		</view>
 
 		<view v-if="ticketType.groundChangCis.length > 0" class="booking-mod">
-			<view class="booking-mod-hd"><text class="booking-mod-hd-title">场次信息</text></view>
+			<view class="booking-mod-hd"><text class="booking-mod-hd-title">入场时段</text></view>
 			<view class="booking-mod-bd">
 				<view>
-					<picker-field
+					<custom-field
 						v-for="groundChangCi in ticketType.groundChangCis"
 						:key="groundChangCi.groundId"
-						:columns="groundChangCi.changCis"
-						:label="groundChangCi.groundName"
+						:param="groundChangCi"
 						v-model="groundChangCi.changCiId"
-						placeholder="请选择场次"
-						class="changCi"
-					/>
+					></custom-field>
 				</view>
 			</view>
 		</view>
@@ -63,9 +62,9 @@
 			</view>
 			<view class="booking-mod-bd">
 				<view v-if="quantity == 1">
-					<input v-if="ticketType.needTouristName" v-model="firstTourist.name" clearable label="姓名" placeholder="须与证件上的名字一致" />
-					<input v-if="ticketType.needTouristMobile" v-model="firstTourist.mobile" clearable label="手机号码" placeholder="请填写手机号码" />
-					<input v-if="ticketType.needCert" v-model="firstTourist.certNo" clearable label="身份证" placeholder="请填写证件号码" />
+					<custom-field v-if="ticketType.needTouristName" v-model="firstTourist.name.vmodel" :param="firstTourist.name" />
+					<custom-field v-if="ticketType.needTouristMobile" v-model="firstTourist.mobile.vmodel" :param="firstTourist.mobile" />
+					<custom-field v-if="ticketType.needCert" v-model="firstTourist.certNo.vmodel" :param="firstTourist.certNo" />
 				</view>
 				<view v-if="quantity > 1" class="booking-tourist">
 					<view style="width:75px;">出行人</view>
@@ -123,18 +122,9 @@
 					联系人
 				</text>
 			</view>
-			<view v-if="ticketType.needTouristName" class="view-input">
-				<view class="input-label"><text>姓名</text></view>
-				<view class="input-view"><input v-model="input.contactName" placeholder="请填写姓名" /></view>
-			</view>
-			<view v-if="ticketType.needTouristMobile" class="view-input">
-				<view class="input-label"><text>联系手机</text></view>
-				<view class="input-view"><input v-model="input.contactMobile" type="tel" placeholder="请填写手机号码" /></view>
-			</view>
-			<view v-if="ticketType.needCert" class="view-input">
-				<view class="input-label"><text>身份证</text></view>
-				<view><input v-model="input.contactCert" type="tel" placeholder="请填写证件号码" /></view>
-			</view>
+			<custom-field v-if="ticketType.needTouristName" v-model="input.contactName.vmodel" :param="input.contactName" />
+			<custom-field v-if="ticketType.needTouristMobile" v-model="input.contactMobile.vmodel" :param="input.contactMobile" />
+			<custom-field v-if="ticketType.needCert" v-model="input.contactCert.vmodel" :param="input.contactCert" />
 		</view>
 
 		<view class="body-active">
@@ -143,11 +133,20 @@
 					<text class="price-label">总额：</text>
 					￥{{ price.toFixed(2) }}
 				</view>
-				<view class="book-button"><button @click="onSubmit" class="order-button">{{submitText}}</button></view>
+				<view class="book-button">
+					<button @click="onSubmit" class="order-button">{{ submitText }}</button>
+				</view>
 			</view>
 		</view>
 
-		<ticket-type-description v-model="showDescription" :show-buy="false" :ticket-type-id="ticketType.id" :ticket-type-name="ticketType.name" :price="price" />
+		<ticket-type-description
+			v-model="showDescription"
+			:show-buy="false"
+			:ticket-type-id="ticketType.id"
+			:ticket-type-name="ticketType.name"
+			:price="price"
+			@close="onDescriptionClose"
+		/>
 
 		<tui-bottom-popup ref="touristPopup" v-if="ticketType.touristInfoType == 3" position="right">
 			<view class="booking-tourist-edit">
@@ -167,6 +166,7 @@
 
 <script>
 import { mapState } from 'vuex';
+import md5 from 'md5';
 import ticketTypeService from './../../services/ticketTypeService.js';
 import orderService from './../../services/orderService.js';
 import validate from '@/utils/validator.js';
@@ -176,9 +176,27 @@ import { mobileMixin } from './../../mixins/mobileMixin.js';
 
 class Tourist {
 	constructor() {
-		this.name = '';
-		this.mobile = '';
-		this.certNo = '';
+		this.name = {
+			label: '姓名',
+			vmodel: '',
+			placeholder: '须与证件上的名字一致',
+			validTypeId: 6,
+			error: false
+		};
+		this.mobile = {
+			label: '手机号码',
+			vmodel: '',
+			placeholder: '请填写手机号码',
+			validTypeId: 3,
+			error: false
+		};
+		this.certNo = {
+			label: '证件号码',
+			vmodel: '',
+			placeholder: '请填写证件号码',
+			validTypeId: 6,
+			error: false
+		};
 	}
 }
 
@@ -194,9 +212,27 @@ export default {
 					}
 				],
 				travelDate: '',
-				contactName: '',
-				contactMobile: '',
-				contactCert: ''
+				contactName: {
+					label: '姓名',
+					vmodel: '',
+					placeholder: '须与证件上的名字一致',
+					validTypeId: 6,
+					error: false
+				},
+				contactMobile: {
+					label: '手机号码',
+					vmodel: '',
+					placeholder: '请填写手机号码',
+					validTypeId: 3,
+					error: false
+				},
+				contactCert: {
+					label: '证件号码',
+					vmodel: '',
+					placeholder: '请填写证件号码',
+					validTypeId: 6,
+					error: false
+				}
 			},
 			quantity: 1,
 			tourists: [],
@@ -258,7 +294,8 @@ export default {
 			}
 			return '新增';
 		},
-		...mapState(['promoterId'])
+		...mapState(['promoterId', 'pageLabelMainText']),
+		...mapState('orderModule', ['signKey'])
 	},
 	watch: {
 		'input.travelDate': async function(val, oldVal) {
@@ -280,7 +317,6 @@ export default {
 			}
 		},
 		quantity: function(val, oldVal) {
-			console.log(val);
 			if (this.ticketType.touristInfoType != 3) return;
 
 			const diff = val - oldVal;
@@ -303,6 +339,14 @@ export default {
 			this.loading();
 
 			this.ticketType = await ticketTypeService.getTicketTypeForWeiXinSaleAsync(this.ticketTypeId);
+			this.ticketType.groundChangCis.forEach(groundChangCi => {
+				groundChangCi.label = groundChangCi.groundName;
+				groundChangCi.placeholder = '请选择入场时段）';
+				groundChangCi.validTypeId = 9;
+				groundChangCi.paramSelectDtos = groundChangCi.changCiDtos.map(a => {
+					return { displayText: `${a.name}（${a.stime}:${a.etime}） 余票：${a.surplusNum}`, value: a.id.toString(), disabled: false };
+				});
+			});
 
 			this.minBuyNum = this.ticketType.minBuyNum > 1 ? this.ticketType.minBuyNum : 1;
 			this.maxBuyNum = this.ticketType.maxBuyNum > 1 ? this.ticketType.maxBuyNum : 1000;
@@ -363,6 +407,7 @@ export default {
 					toastHelper.noneToast(`最多购买${this.maxBuyNum}份`);
 				});
 			}
+			this.quantity = val.value;
 		},
 		onTouristEdit(index) {
 			this.currentTouristIndex = index;
@@ -412,7 +457,7 @@ export default {
 				if (!this.ticketType.needTouristMobile) {
 					const validateRules = [
 						{
-							value: this.input.contactMobile,
+							value: this.input.contactMobile.vmodel,
 							name: '联系手机',
 							rules: [{ rule: 'required' }, { rule: 'isMobile' }]
 						}
@@ -429,21 +474,21 @@ export default {
 				const validateRules = [];
 				if (this.ticketType.needTouristName) {
 					validateRules.push({
-						value: this.input.contactName,
+						value: this.input.contactName.vmodel,
 						name: '姓名',
 						rules: [{ rule: 'required' }]
 					});
 				}
 				if (this.ticketType.needTouristMobile) {
 					validateRules.push({
-						value: this.input.contactMobile,
+						value: this.input.contactMobile.vmodel,
 						name: '联系手机',
 						rules: [{ rule: 'required' }, { rule: 'isMobile' }]
 					});
 				}
 				if (this.ticketType.needCert) {
 					validateRules.push({
-						value: this.input.contactCert,
+						value: this.input.contactCert.vmodel,
 						name: '身份证',
 						rules: [{ rule: 'required' }, { rule: 'isIdCard' }]
 					});
@@ -480,21 +525,21 @@ export default {
 			const rules = [];
 			if (this.ticketType.needTouristName) {
 				rules.push({
-					value: tourist.name,
+					value: tourist.name.vmodel,
 					name: '姓名',
 					rules: [{ rule: 'required' }]
 				});
 			}
 			if (this.ticketType.needTouristMobile) {
 				rules.push({
-					value: tourist.mobile,
+					value: tourist.mobile.vmodel,
 					name: '手机号码',
 					rules: [{ rule: 'required' }, { rule: 'isMobile' }]
 				});
 			}
 			if (this.ticketType.needCert) {
 				rules.push({
-					value: tourist.certNo,
+					value: tourist.certNo.vmodel,
 					name: '身份证',
 					rules: [{ rule: 'required' }, { rule: 'isIdCard' }]
 				});
@@ -508,20 +553,29 @@ export default {
 		},
 		async createOrder() {
 			try {
+				let input = {};
 				this.input.items[0].quantity = this.quantity;
-				this.input.items[0].tourists = this.tourists;
+				this.input.items[0].tourists = this.tourists.map( a=> {
+					return { name: a.name.vmodel, mobile: a.mobile.vmodel, certNo: a.certNo.vmodel}
+				});
 				this.input.items[0].groundChangCis = this.ticketType.groundChangCis.map(g => {
 					return { groundId: g.groundId, changCiId: g.changCiId };
 				});
-				this.input.promoterId = this.promoterId;
+				input.promoterId = this.promoterId;
+				input.items = this.input.items;
+				input.contactName = this.input.contactName.vmodel;
+				input.contactMobile = this.input.contactMobile.vmodel;
+				input.contactCert = this.input.contactCert.vmodel;
+				input.travelDate = this.input.travelDate;
+				input.sign = md5(`${input.travelDate}${input.items[0].ticketTypeId}${input.items[0].quantity}${this.signKey}`);
 
 				this.saving = true;
-				const result = await orderService.createWeiXinOrderAsync(this.input);
+				const result = await orderService.createWeiXinOrderAsync(input);
 				this.submited = true;
 				if (result.shouldPay) {
 					uni.setStorageSync('Pay:Product', this.ticketType.name);
 				}
-				
+
 				if (result.shouldPay) {
 					uni.redirectTo({
 						url: '/pages/payment/wx-js-pay?listNo=' + result.listNo
@@ -534,6 +588,9 @@ export default {
 			} finally {
 				this.saving = false;
 			}
+		},
+		onDescriptionClose() {
+			this.showDescription = false;
 		}
 	}
 };
@@ -545,6 +602,7 @@ export default {
 	background-color: #c0c7cf;
 	min-height: calc(100vh - 46px);
 	box-sizing: border-box;
+	font-size: 14px;
 
 	&-mod {
 		margin-bottom: 10px;

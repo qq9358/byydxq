@@ -53,10 +53,10 @@
         "permission" : {}
     },
     "h5" : {
-        "title" : "冰场管理系统",
+        "title" : "不一样的星球",
         "router" : {
             "mode" : "history",
-            "base" : ""
+            "base" : "/login/"
         },
         "sdkConfigs" : {
             "maps" : {

@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<tui-bottom-popup :show="value" @close="onClose">
+		<uni-popup ref="popup" type="bottom" @change="onPopupChange">
 			<view class="uni-common-mt">
 				<view><map :latitude="latitude" scale="5" :longitude="longitude" :markers="covers" @controltap="onMapTap" @regionchange="mapRegionChange"></map></view>
 			</view>
-		</tui-bottom-popup>
+		</uni-popup>
 	</view>
 </template>
 <script>

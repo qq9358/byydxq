@@ -1,17 +1,35 @@
 <template>
 	<div>
-		<tui-bottom-popup :show="value" @close="onClose"><div class="popup-div">这是公告详情</div></tui-bottom-popup>
+		<uni-popup ref="popup" type="bottom" @change="onPopupChange">
+			<div class="description">
+				<div class="description-title">
+					<div>{{ pageLabelMainText }}公告</div>
+					<div class="description-close-btn" @click="onPopupChange"><text class="iconfont icon-cuowu"></text></div>
+				</div>
+				<div style="height: 100%; overflow-y: auto;">
+					<div class="description-content">
+						<div style="height:40px;">&nbsp;</div>
+						<div v-if="scenic.noticeContent" class="description-content-item">
+							<div class="description-content-item-text" v-html="scenic.noticeContent"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</uni-popup>
 	</div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
 	name: 'notice',
 	props: {
 		value: {
 			type: Boolean,
 			default: false
-		}
+		},
+		scenic: {}
 	},
 	data() {
 		return {
@@ -20,13 +38,21 @@ export default {
 	},
 	watch: {
 		value(val) {
-			this.showPopup = val;
+			if(val){
+				this.$refs.popup.open();
+			} else {
+				this.$refs.popup.close();
+			}
 		}
 	},
-	methods:{
-		onClose(){
-			this.showPopup = false;
-			this.$emit("close",{})
+	computed: {
+		...mapState(['pageLabelMainText'])
+	},
+	methods: {
+		onPopupChange(res) {
+			if(!res.show){
+				this.$emit('input', false);
+			}
 		}
 	}
 };
@@ -35,5 +61,66 @@ export default {
 <style lang="scss">
 .popup-div {
 	padding: 100px 0px 100px 0px;
+}
+</style>
+
+<style lang="scss" scoped>
+.description {
+	background-color: #fff;
+	transition: all 0.3s ease;
+	transform: translateY(0);
+
+	&-title {
+		left: 0;
+		top: 0;
+		width: 100%;
+		z-index: 100;
+		position: fixed;
+		height: 40px;
+		line-height: 40px;
+		font-size: 18px;
+		text-align: center;
+		background-color: #efefef;
+	}
+
+	&-close-btn {
+		right: 0;
+		top: 0;
+		position: absolute;
+		color: #999;
+		width: 40px;
+		height: 40px;
+	}
+
+	&-content {
+		position: relative;
+		font-size: 15px;
+		height: 84vh;
+		overflow-y: auto;
+		box-sizing: border-box;
+
+		&-item {
+			margin-left: 15px;
+			padding: 15px 15px 15px 0;
+			word-wrap: break-word;
+			word-break: normal;
+			border-bottom: 1px solid #dbdbdb;
+
+			h3 {
+				color: #333;
+				font-size: 100%;
+				font-weight: 700;
+				padding-bottom: 5px;
+			}
+
+			&-text {
+				margin-left: 15px;
+			}
+
+			/deep/ img {
+				max-width: 100% !important;
+			}
+		}
+	}
 }
 </style>

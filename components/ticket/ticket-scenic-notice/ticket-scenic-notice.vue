@@ -1,9 +1,9 @@
 <template>
-  <tui-bottom-popup ref="notice-popup" v-model="show" position="bottom">
+  <uni-popup ref="popup" type="bottom" @change="onPopupChange">
     <view class="description">
       <view class="description-title">
         <view>景区公告</view>
-        <view class="description-close-btn" @click="onClose">
+        <view class="description-close-btn" @click="onPopupChange(false)">
           <van-icon name="cuowu" />
         </view>
       </view>
@@ -16,7 +16,7 @@
         </view>
       </view>
     </view>
-  </tui-bottom-popup>
+  </uni-popup>
 </template>
 
 <script>
@@ -49,14 +49,20 @@ export default {
       }
     },
     show(val) {
-      if (!val) {
-        this.$emit("input", val);
+      value(val) {
+      	if(val){
+      		this.$refs.popup.open();
+      	} else {
+      		this.$refs.popup.close();
+      	}
       }
     }
   },
   methods: {
-    onClose() {
-      this.show = false;
+    onPopupChange(res) {
+    	if(!res.show){
+    		this.$emit('input', false);
+    	}
     }
   }
 };

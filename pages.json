@@ -46,6 +46,16 @@
 			"navigationBarTitleText": "消息列表"
 		}
 	}, {
+		"path": "pages/member/bind-member",
+		"style": {
+			"navigationBarTitleText": "会员绑定"
+		}
+	},{
+		"path": "pages/member/regist-member",
+		"style": {
+			"navigationBarTitleText": "会员注册"
+		}
+	},{
 		"path": "pages/payment/wx-js-pay",
 		"style": {
 			"navigationBarTitleText": "订单支付"
@@ -54,7 +64,9 @@
 		"path": "pages/order/order-detail",
 		"style": {
 			"navigationBarTitleText": "订单详情",
-			"enablePullDownRefresh": true
+			"enablePullDownRefresh": true,
+			"navigationBarBackgroundColor":"#19a0f0",
+			"navigationBarTextStyle": "white"
 		}
 	}, {
 		"path": "pages/member/my-ticket",
@@ -74,12 +86,13 @@
 		"custom": {
 			"tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue",
 			"custom-(.*)": "@/components/custom/custom-$1/custom-$1.vue",
-			"ticket-(.*)": "@/components/ticket/ticket-$1/ticket-$1.vue"
+			"ticket-(.*)": "@/components/ticket/ticket-$1/ticket-$1.vue",
+			"uni-(.*)": "@/components/uni/uni-$1/uni-$1.vue"
 		}
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "冰场管理系统",
+		"navigationBarTitleText": "不一样的星球",
 		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#FFFFFF"
 	},

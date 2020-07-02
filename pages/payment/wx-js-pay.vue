@@ -18,6 +18,7 @@
 			</view>
 		</view>
 		<view class="in-button"><button type="primary" size="large" :loading="saving" @click="pay">确认支付</button></view>
+		<tui-modal :show="modal" @click="handleClick" @cancel="hide" title="提示" content="你的支付尚未完成，是否取消支付？"></tui-modal>
 	</view>
 </template>
 
@@ -37,7 +38,8 @@ export default {
 			queryTimer: -1,
 			saving: false,
 			shouldConfirm: true,
-			listNo: ''
+			listNo: '',
+			modal: false
 		};
 	},
 	computed: {
@@ -93,35 +95,15 @@ export default {
 			console.log(err);
 		}
 	},
-	onHide(to, from, next) {
-		console.log(to);
-		console.log(from);
-		console.log(next);
+	beforeRouteLeave(to, from, next) {
 		if (!this.shouldConfirm || to.meta.shouldNotConfirm) {
 			this.clear();
 			next();
 			return;
 		}
-
-		this.$dialog
-			.confirm({
-				title: '你的支付尚未完成，是否取消支付？',
-				showCancelButton: true,
-				confirmButtonText: '继续支付',
-				cancelButtonText: '取消支付'
-			})
-			.then(() => {
-				next(false);
-			})
-			.catch(() => {
-				this.clear();
-				this.shouldConfirm = false;
-				next({
-					name: 'orderdetail',
-					params: { listNo: this.listNo },
-					replace: true
-				});
-			});
+		
+		this.modal = true;
+		next(false);
 	},
 	methods: {
 		async pay() {
@@ -140,28 +122,28 @@ export default {
 					package: payObj.package,
 					signType: payObj.signType,
 					paySign: payObj.paySign,
-					success: function(res){
+					success: function(res) {
 						console.log(res);
 					},
-					fail: function(err){
+					fail: function(err) {
 						console.log(err);
-						if(err.errMsg != "requestPayment:fail cancel"){
+						if (err.errMsg != 'requestPayment:fail cancel') {
 							commonService.logError(err.errMsg);
 							toastHelper.noneToast(err.errMsg);
 						}
 						return;
 					},
-					complete(res){
+					complete(res) {
 						console.log(res);
 					}
-				})
+				});
 				/* #endif */
 				/* #ifndef MP */
 				payArgs = await paymentService.jsApiPayAsync(this.listNo);
 				await weiXinJsSdkHelper.jsApiPay(payArgs);
 				/* #endif */
 				console.log(payArgs);
-				
+
 				uni.showLoading({
 					title: '查询支付结果...'
 				});
@@ -189,6 +171,21 @@ export default {
 		clear() {
 			clearInterval(this.timer);
 			clearInterval(this.queryTimer);
+		},
+		handleClick(e) {
+			let index = e.index;
+			if (index === 0) {
+			} else {
+				this.clear();
+				this.shouldConfirm = false;
+				uni.navigateTo({
+					url: `/pages/order/order-detail?listNo=${this.listNo}`
+				});
+			}
+			this.hide();
+		},
+		hide() {
+			this.modal = false;
 		}
 	}
 };

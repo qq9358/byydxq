@@ -1,55 +1,61 @@
 <template>
-	<tui-bottom-popup ref="descriptionPopup" type="bottom" @change="popupChange">
-		<div class="view-popup description">
-			<div class="popup-header">
-				<div>购买须知</div>
-				<!-- <div class="description-close-btn" @click="onClose"><van-icon name="cuowu" /></div> -->
-			</div>
-			<div class="popup-body">
-				<div class="description-content">
-					<div class="description-content-item description-content-title">
-						<span>{{ ticketTypeName }}</span>
-					</div>
-					<div v-if="description.bookDescription" class="description-content-item">
-						<h3>预订说明</h3>
-						<div class="description-content-item-text" v-html="description.bookDescription"></div>
-					</div>
-					<div v-if="description.feeDescription" class="description-content-item">
-						<h3>费用说明</h3>
-						<div class="description-content-item-text" v-html="description.feeDescription"></div>
-					</div>
-					<div v-if="description.usageDescription" class="description-content-item">
-						<h3>使用说明</h3>
-						<div class="description-content-item-text" v-html="description.usageDescription"></div>
-					</div>
-					<div v-if="description.refundDescription" class="description-content-item">
-						<h3>退改说明</h3>
-						<div class="description-content-item-text" v-html="description.refundDescription"></div>
-					</div>
-					<div v-if="description.otherDescription" class="description-content-item">
-						<h3>其他说明</h3>
-						<div class="description-content-item-text" v-html="description.otherDescription"></div>
-					</div>
-					<div v-if="showBuy" :style="submitStyle">&nbsp;</div>
-				</div>
-				<view v-if="showBuy" class="body-active">
-					<view :class="{ 'view-checkbox': true, 'view-checkbox-disable': second > 0 }">
-						<checkbox-group @change="acceptChange">
-							<label>
-								<checkbox value="accept" :disabled="second > 0" />
-								我已认真阅读购买须知并同意
-								<text v-if="second > 0">({{ second }})</text>
-							</label>
-						</checkbox-group>
+	<uni-popup ref="popup" type="bottom" @change="onPopupChange">
+		<view class="view-popup description">
+			<view class="description-title">
+				<view class="title-icon"><text class="iconfont icon-bingbao"></text></view>
+				<view class="title-text">{{ ticketTypeName }}</view>
+				<view class="description-close-btn" @click="onPopupChange(false)"><text class="iconfont icon-cuowu"></text></view>
+			</view>
+			<view class="popup-body">
+				<view class="view-description-content">
+					<view class="description-content">
+						<view v-if="description.bookDescription" class="description-content-item">
+							<view class="content-item-title">
+								<view class="item-title-line"></view>
+								<h3>预订说明</h3>
+							</view>
+							<view class="description-content-item-text" v-html="description.bookDescription"></view>
+						</view>
+						<view v-if="description.feeDescription" class="description-content-item">
+							<h3>费用说明</h3>
+							<view class="description-content-item-text" v-html="description.feeDescription"></view>
+						</view>
+						<view v-if="description.usageDescription" class="description-content-item">
+							<h3>使用说明</h3>
+							<view class="description-content-item-text" v-html="description.usageDescription"></view>
+						</view>
+						<view v-if="description.refundDescription" class="description-content-item">
+							<h3>退改说明</h3>
+							<view class="description-content-item-text" v-html="description.refundDescription"></view>
+						</view>
+						<view v-if="description.otherDescription" class="description-content-item">
+							<h3>其他说明</h3>
+							<view class="description-content-item-text" v-html="description.otherDescription"></view>
+						</view>
+						<view v-if="showBuy" :style="submitStyle">&nbsp;</view>
 					</view>
-					<view class="view-book">
-						<view class="book-price">￥{{ price }}</view>
-						<view class="book-button"><button @click="onBuy" :disabled="!accept" class="order-button">立即预订</button></view>
+					<view v-if="showBuy" class="body-active">
+						<view v-if="shouldRead" :class="{ 'view-checkbox': true, 'view-checkbox-disable': second > 0 }">
+							<checkbox-group @change="acceptChange">
+								<label>
+									<checkbox value="accept" :disabled="second > 0" />
+									我已认真阅读购买须知并同意
+									<text v-if="second > 0">({{ second }})</text>
+								</label>
+							</checkbox-group>
+						</view>
+						<view class="view-book">
+							<view class="book-price">
+								￥{{ price }}
+								<text class="price-text">起</text>
+							</view>
+							<view class="book-button"><button @click="onBuy" :disabled="!accept" class="order-button">立即预订</button></view>
+						</view>
 					</view>
 				</view>
-			</div>
-		</div>
-	</tui-bottom-popup>
+			</view>
+		</view>
+	</uni-popup>
 </template>
 
 <script>
@@ -126,7 +132,7 @@ export default {
 					await this.loadDescription();
 				}
 			} else {
-				this.$refs.descriptionPopup.close();
+				this.$refs.popup.close();
 			}
 		},
 		show(val) {
@@ -139,14 +145,11 @@ export default {
 				}
 				this.$emit('input', val);
 			} else {
-				this.$refs.descriptionPopup.open();
+				this.$refs.popup.open();
 			}
 		}
 	},
 	methods: {
-		onClose() {
-			this.show = false;
-		},
 		onBuy() {
 			uni.navigateTo({
 				url: '/pages/ticket/buy-ticket?ticketTypeId=' + this.ticketTypeId
@@ -171,16 +174,15 @@ export default {
 				}
 			}, 1000);
 		},
-		popupChange(a) {
-			if (!a.show) {
+		onPopupChange(res) {
+			if (!res.show) {
 				this.show = false;
-				this.accept = false;
 			}
 		},
-		acceptChange(a){
-			if(a.detail.value.length > 0){
+		acceptChange(a) {
+			if (a.detail.value.length > 0) {
 				this.accept = true;
-			}else{
+			} else {
 				this.accept = false;
 			}
 		}
@@ -204,7 +206,15 @@ export default {
 		line-height: 40px;
 		font-size: 18px;
 		text-align: center;
-		background-color: #efefef;
+		// background-color: #efefef;
+		display: flex;
+		.title-icon {
+			padding: 6px 12px 0px 15px;
+			.iconfont {
+				color: #ff7d13;
+				font-size: 27px;
+			}
+		}
 	}
 
 	&-close-btn {
@@ -219,16 +229,15 @@ export default {
 	&-content {
 		position: relative;
 		font-size: 15px;
-		height: 84vh;
 		overflow-y: auto;
 		box-sizing: border-box;
+		padding: 20px 0px 0px 0px;
 
 		&-item {
-			margin-left: 15px;
-			padding: 15px 15px 15px 0;
+			// margin: 0px 15px 0px 15px;
+			// padding: 15px 15px 15px 0;
 			word-wrap: break-word;
 			word-break: normal;
-			border-bottom: 1px solid #dbdbdb;
 
 			h3 {
 				color: #333;
@@ -258,6 +267,30 @@ export default {
 	&-read {
 		justify-content: center;
 		padding: 10px 0;
+	}
+}
+
+.price-text {
+	font-size: 14px;
+	color: #444444;
+	padding: 0px 0px 0px 3px;
+}
+
+.view-description-content {
+	
+	    padding: 55px 0px 0px 0px;
+		.description-content{
+			    margin: 0px 15px 0px 15px;
+			    border: 1px solid #efefef;
+		}
+	.content-item-title {
+		display: flex;
+		.item-title-line {
+			width: 0px;
+			height: 20px;
+			margin: -1px 8px 0px 3px;
+			border: 1.5px solid #5296de;
+		}
 	}
 }
 </style>

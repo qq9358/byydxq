@@ -42,5 +42,17 @@ const member = [{
 	meta: {
 		title: '我的门票'
 	}
+},{
+	path: '/pages/member/bind-member',
+	name: 'bind-member',
+	meta: {
+		title: '会员绑定'
+	}
+},{
+	path: '/pages/member/regist-member',
+	name: 'regist-member',
+	meta: {
+		title: '会员注册'
+	}
 }]
 export default member

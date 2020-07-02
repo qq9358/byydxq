@@ -18,7 +18,8 @@ export default new Vuex.Store({
     clientHeight: 500,
     groundId: "",
     wxJsApiConfigedPages: [],
-    promoterId: ""
+    promoterId: "",
+	pageLabelMainText: '景区'
   },
   mutations: {
     [appConsts.setTitle](state, value) {
@@ -54,6 +55,9 @@ export default new Vuex.Store({
     },
     setPromoterId(state, promoterId) {
       state.promoterId = promoterId;
+    },
+    setPageLabelMainText(state, value){
+      state.pageLabelMainText = value;
     }
   },
   modules: {

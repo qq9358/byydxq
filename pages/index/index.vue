@@ -1,9 +1,8 @@
 <template>
 	<view class="view-index">
 		<view class="gradient-view">
-			<view class="tui-banner-box">
+			<view class="tui-banner-box" :style="{ height: swipeHeight + 'px' }">
 				<swiper
-					:indicator-dots="true"
 					:autoplay="true"
 					:interval="5000"
 					:duration="150"
@@ -12,153 +11,70 @@
 					indicator-color="rgba(255, 255, 255, 0.8)"
 					indicator-active-color="#fff"
 				>
-					<swiper-item v-for="(item, index) in images" :key="index" @tap.stop="detail">
-						<view class="view-gradient" :style="{ background: `linear-gradient(to bottom right, ${selectColors[index][0]}, ${selectColors[index][1]})` }">
-							<view class="view-style"><img class="style-img" src="@/static/images/pages/index/index_header_style.png" /></view>
-							<view class="view-title">冰场票务中心</view>
-							<image :src="item" class="tui-slide-image" mode="scaleToFill" />
-						</view>
-					</swiper-item>
+					<swiper-item v-for="(item, index) in images" :key="index"><image :src="item" class="tui-slide-image" mode="scaleToFill" /></swiper-item>
 				</swiper>
 			</view>
 		</view>
-		<view @click="onShowNotice" class="scenic-event">
+		<view v-if="scenic.noticeTitle" @click="onShowNotice" class="scenic-event">
 			<view>
 				<text class="iconfont icon-gonggao"></text>
-				<span>{{ scenic.noticeTitle }}看一看，瞧一瞧啦，这里有公告</span>
+				<span>{{ scenic.noticeTitle }}</span>
 			</view>
 			<view class="scenic-more"><text class="iconfont icon-arrow"></text></view>
 		</view>
-		<view class="view-icon-button">
-			<view class="view-tap">
-				<view class="icon-button-gift icon-button-view"><view class="iconfont icon-gift1"></view></view>
-				<view class="icon-button-tap">冰场活动</view>
+		<view class="scenic-ext" @click="onIntroduction">
+			<view>
+				<view class="scenic-ext-title">
+					<span v-if="scenic.openText">开放时间</span>
+					<span>景区特色</span>
+					<span>景区简介</span>
+				</view>
+				<view v-if="scenic.openText" class="scenic-ext-word">{{ scenic.openText }}</view>
 			</view>
-			<view class="view-tap">
-				<view class="icon-button-alarm icon-button-view"><view class="iconfont icon-alarm"></view></view>
-				<view class="icon-button-tap">课程预约</view>
-			</view>
-			<view class="view-tap">
-				<view class="icon-button-ice-skate icon-button-view"><view class="iconfont icon-ice-skate"></view></view>
-				<view class="icon-button-tap">冰场简介</view>
-			</view>
-			<view class="view-tap">
-				<view class="icon-button-coach icon-button-view"><view class="iconfont icon-coach"></view></view>
-				<view class="icon-button-tap">教练介绍</view>
+			<view class="scenic-more">
+				<text class="active-text">详情</text>
+				<text class="iconfont icon-arrow"></text>
 			</view>
 		</view>
-		<view class="view-activity-swiper">
-			<view class="tui-banner-box tui-activity-box">
-				<swiper
-					:indicator-dots="true"
-					:autoplay="true"
-					:interval="5000"
-					:duration="150"
-					class="tui-banner-swiper tui-activity-swiper"
-					:circular="true"
-					indicator-color="rgba(255, 255, 255, 0.8)"
-					indicator-active-color="#fff"
-				>
-					<swiper-item v-for="(item, index) in activityImages" :key="index" @tap.stop="detail">
-						<view class="view-activity-image"><image :src="item" class="activity-image" mode="scaleToFill" /></view>
-					</swiper-item>
-				</swiper>
-			</view>
-		</view>
-		<view v-if="showStudent" class="view-module">
-			<view v-if="showClothing" class="module-left" @click="showClothing = false">
-				<view class="module-view module-big-ticket">
-					<view class="module-title big-ticket-title">冰场滑冰票</view>
-					<view class="module-button ticket-button">
-						立即预订
-						<text class="iconfont icon-arrow"></text>
-					</view>
+		<view class="view-categorys">
+			<view v-for="category in categorys" :key="category.id" class="view-category">
+				<view class="category-header">
+					<view class="iconfont icon-menpiao"></view>
+					<text>{{ category.name }}</text>
 				</view>
-			</view>
-			<view v-if="!showClothing" class="module-left">
-				<view class="module-view module-ticket" @click="onTicketClick">
-					<view class="module-title ticket-title">冰场滑冰票</view>
-					<view class="module-button ticket-button">
-						立即预订
-						<text class="iconfont icon-arrow"></text>
-					</view>
-				</view>
-				<view class="module-view module-clothing" @click="showClothing = true">
-					<view class="module-title clothing-title">护具出租</view>
-					<view class="module-button clothing-button">
-						立即预订
-						<text class="iconfont icon-arrow"></text>
-					</view>
-				</view>
-			</view>
-			<view class="module-right">
-				<view class="module-view module-course" @click="showStudent = false">
-					<view class="module-title course-title">学员课程</view>
-					<view class="module-button course-button">
-						立即预订
-						<text class="iconfont icon-arrow"></text>
-					</view>
-				</view>
-				<view class="module-view module-card">
-					<view class="module-title card-title">会员卡</view>
-					<view class="module-button card-button">
-						立即预订
-						<text class="iconfont icon-arrow"></text>
+				<view class="category-body">
+					<view v-for="ticketType in ticketTypes" :key="ticketType.id" class="view-items">
+						<view class="item-content">
+							<view class="item-name">{{ ticketType.name }}</view>
+							<view class="item-status">
+								<text>{{ ticketType.travelDateText }}</text>
+								<text :style="{ color: getRefundColor(ticketType) }">{{ ' ' + ticketType.refundText + ' ' }}</text>
+								<text>无需取票</text>
+							</view>
+							<view class="item-explain" @click="onShowDescription(ticketType)"><text>新品 | 购买须知></text></view>
+						</view>
+						<view class="item-active">
+							<view class="view-price">
+								<text class="text-price">￥{{ ticketType.price }}</text>
+							</view>
+							<view class="view-book" @click="onBuy(ticketType)"><button>立即预订</button></view>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view v-if="!showStudent" class="view-coach">
-			<view class="coach-row">
-				<view class="coach-view coach-confirm">
-					<view v-if="true" class="coach-num">
-						待确认
-						<br />
-						3
-					</view>
-					<view v-else class="coach-num-null"></view>
-					<view class="coach-icon"><img class="coach-icon-img" src="@/static/images/pages/index/coach_icon_confirm.png" /></view>
-					<view class="icon-background"><text class="iconfont icon-kecheng icon-kecheng-confirm"></text></view>
-					<view class="coach-title">待确认课程</view>
-				</view>
-				<view class="coach-view coach-teach" @click="showStudent = true">
-					<view v-if="true" class="coach-num">
-						待确认
-						<br />
-						2
-					</view>
-					<view v-else class="coach-num-null"></view>
-					<view class="coach-icon"><img class="coach-icon-img" src="@/static/images/pages/index/coach_icon_teach.png" /></view>
-					<view class="icon-background"><text class="iconfont icon-kecheng icon-kecheng-teach"></text></view>
-					<view class="coach-title">待教学课程</view>
-				</view>
-			</view>
-			<view class="coach-row">
-				<view class="coach-view coach-end">
-					<view v-if="true" class="coach-num">
-						待确认
-						<br />
-						1
-					</view>
-					<view v-else class="coach-num-null"></view>
-					<view class="coach-icon"><img class="coach-icon-img" src="@/static/images/pages/index/coach_icon_end.png" /></view>
-					<view class="icon-background"><text class="iconfont icon-kecheng icon-kecheng-end"></text></view>
-					<view class="coach-title">已完结课程</view>
-				</view>
-				<view class="coach-view coach-lesson">
-					<view v-if="false" class="coach-num">
-						待确认
-						<br />
-						3
-					</view>
-					<view v-else class="coach-num-null"></view>
-					<view class="coach-icon"><img class="coach-icon-img" src="@/static/images/pages/index/coach_icon_lesson.png" /></view>
-					<view class="icon-background"><text class="iconfont icon-kecheng icon-kecheng-lesson"></text></view>
-					<view class="coach-title">教练课表</view>
-				</view>
-			</view>
-		</view>
-		<ticket-notice v-model="showNotice" @close="onCloseNotice"></ticket-notice>
+		<ticket-notice v-model="showNotice" :scenic="scenic" @close="onCloseNotice"></ticket-notice>
+		<ticket-introduction v-model="showIntroduction" :scenic="scenic" @close="onIntroductionClose"></ticket-introduction>
+		<ticket-type-description
+			v-model="showDescription"
+			:show-buy="true"
+			:ticketTypeId="selectedTicketType.id"
+			:ticketTypeName="selectedTicketType.name"
+			:price="selectedTicketType.price"
+			:shouldRead="selectedTicketType.shouldReadDescription"
+			@close="onDescriptionClose"
+		></ticket-type-description>
+		<ticket-member-select v-model="showMemberSelect" @close="onMemberSelectClose"></ticket-member-select>
 	</view>
 </template>
 
@@ -173,9 +89,6 @@ import memberService from '@/services/memberService.js';
 import iSwiperOne from '@/static/images/pages/index/index_swiper_one.png';
 import iSwiperTwo from '@/static/images/pages/index/index_swiper_two.png';
 import iSwiperThree from '@/static/images/pages/index/index_swiper_three.png';
-import iActivityOne from '@/static/images/pages/index/activity_swiper_one.png';
-import iActivityTwo from '@/static/images/pages/index/activity_swiper_two.png';
-import iActivityThree from '@/static/images/pages/index/activity_swiper_three.png';
 
 const today = dayjs();
 const tomorrow = dayjs().addDays(1);
@@ -232,7 +145,6 @@ export default {
 				}
 			],
 			images: [iSwiperOne, iSwiperTwo, iSwiperThree],
-			activityImages: [iActivityOne, iActivityTwo, iActivityThree],
 			scenic: {},
 			ticketTypes: [],
 			selectedTicketType: {},
@@ -241,16 +153,14 @@ export default {
 			groundId: 1,
 			showDescription: false,
 			showNotice: false,
-			screenWidth: 0,
+			swipeHeight: 150,
 			selectColors: [['#A5B4E4', '#6361EE'], ['#FB754E', '#FB3A47'], ['#254334', '#BF94D8']],
 			showClothing: false,
-			showStudent: true
+			showStudent: true,
+			showIntroduction: false,
+			showMemberSelect: false,
+			memberSelect: false
 		};
-	},
-	computed: {
-		swipeHeight() {
-			return (this.screenWidth / 640) * 360;
-		}
 	},
 	async onLoad() {
 		/* #ifndef MP */
@@ -262,8 +172,8 @@ export default {
 		/* #ifdef MP */
 		await memberService.loginFromMiniAsync();
 		/* #endif */
-		let systemInfo = await uni.getSystemInfo();
-		this.screenWidth = systemInfo[1].screenWidth;
+		let systemInfo = uni.getSystemInfoSync();
+		this.swipeHeight = (systemInfo.screenWidth / 640) * 360;
 
 		await settingService.getSettingsFromWeChatAsync();
 
@@ -304,6 +214,7 @@ export default {
 				}
 
 				this.scenic = scenic;
+				this.setPageLabelMainText(this.scenic.pageLabelMainText);
 			})
 			.then(() => {
 				let shareUrl = `${this.origin}/tickettype/${this.publicSaleFlag}`;
@@ -323,7 +234,10 @@ export default {
 	},
 	methods: {
 		onIntroduction() {
-			this.$refs.introductionPopup.open();
+			this.showIntroduction = true;
+		},
+		onIntroductionClose() {
+			this.showIntroduction = false;
 		},
 		onBook() {
 			uni.navigateTo({
@@ -331,18 +245,16 @@ export default {
 			});
 		},
 		onBuy(ticketType) {
-			if (ticketType.shouldReadDescription) {
-				this.onShowDescription(ticketType);
+			this.selectedTicketType = ticketType
+			if(!this.memberSelect){
+				this.showMemberSelect = true;
 			} else {
-				uni.navigateTo({
-					url: '/pages/ticket/buy-ticket?ticketTypeId=' + ticketType.id
-				});
+				this.toBuy();
 			}
 		},
 		onShowDescription(ticketType) {
 			this.selectedTicketType = ticketType;
 			this.showDescription = true;
-			// this.$refs.itemExplainPopup.open();
 		},
 		getTravelDateText(ticketType) {
 			const startTravelDate = dayjs(ticketType.startTravelDate);
@@ -381,7 +293,24 @@ export default {
 				url: '/pages/ticket/ticket-type'
 			});
 		},
-		...mapMutations(['setGroundId'])
+		onDescriptionClose(){
+			this.showDescription = false;
+		},
+		onMemberSelectClose(){
+			this.showMemberSelect = false;
+			this.memberSelect = true;
+			this.toBuy();
+		},
+		toBuy(){
+			if (this.selectedTicketType.shouldReadDescription) {
+				this.onShowDescription(this.selectedTicketType);
+			} else {
+				uni.navigateTo({
+					url: '/pages/ticket/buy-ticket?ticketTypeId=' + this.selectedTicketType.id
+				});
+			}
+		},
+		...mapMutations(['setGroundId', 'setPageLabelMainText'])
 	}
 };
 </script>
@@ -389,266 +318,7 @@ export default {
 <style lang="scss">
 .view-index {
 	font-size: 14px;
-	background-color: #ffffff;
-	.color-swiper {
-		width: 100%;
-		overflow: hidden;
-		border-bottom-right-radius: 20px;
-		border-bottom-left-radius: 20px;
-	}
-
-	.view-gradient {
-		height: 163px;
-		width: 100%;
-		margin: 0 auto;
-		// padding: 0px 10px 0px 10px;
-		border-bottom-right-radius: 20px;
-		border-bottom-left-radius: 20px;
-		.view-title {
-			color: #ffffff;
-			margin-top: -51px;
-			font-size: 17px;
-			text-align: center;
-		}
-
-		.view-style {
-			overflow: hidden;
-			height: 80px;
-			.style-img {
-				width: 100%;
-			}
-		}
-	}
-
-	.gradient-view {
-		width: 100%;
-		// border-radius: 6px;
-		overflow: hidden;
-		.gradient-img {
-			width: 100%;
-			height: 100%;
-		}
-	}
-
-	.view-module {
-		display: flex;
-		justify-content: space-between;
-		padding: 10px 11px 30px 11px;
-
-		.module-left {
-			width: 50%;
-		}
-
-		.module-right {
-			width: 50%;
-		}
-
-		.module-view {
-			margin: 10px 5px 0px 5px;
-			height: 50%;
-			.module-title {
-				padding: 19px 0px 0px 18px;
-				font-size: 18px;
-				color: #ffffff;
-			}
-
-			.module-button {
-				width: 62px;
-				background: #ffffff;
-				border-radius: 20px;
-				padding: 2px 2px 2px 8px;
-				margin: 10px 0px 0px 18px;
-				font-size: 12px;
-				.iconfont {
-					font-size: 12px;
-				}
-			}
-		}
-
-		.module-ticket {
-			background: url('@/static/images/pages/index/module_background_ticket.png');
-			background-size: 100% 100%;
-			color: #00a596;
-			.iconfont {
-				color: #00a596;
-			}
-		}
-
-		.module-big-ticket {
-			height: calc(100% + 10px);
-			background: url('@/static/images/pages/index/module_background_big_ticket.png');
-			background-size: 100% 100%;
-			color: #00a596;
-			.iconfont {
-				color: #00a596;
-			}
-		}
-
-		.module-course {
-			background: url('@/static/images/pages/index/module_background_course.png');
-			background-size: 100% 100%;
-			color: #0081c3;
-			.iconfont {
-				color: #0081c3;
-			}
-		}
-
-		.module-clothing {
-			background: url('@/static/images/pages/index/module_background_clothing.png');
-			background-size: 100% 100%;
-			color: #ee7225;
-			.iconfont {
-				color: #ee7225;
-			}
-		}
-
-		.module-card {
-			background: url('@/static/images/pages/index/module_background_card.png');
-			background-size: 100% 100%;
-			color: #8804e1;
-			.iconfont {
-				color: #8804e1;
-			}
-		}
-	}
-
-	.view-coach {
-		padding: 10px 10px 10px 10px;
-		.coach-row {
-			display: flex;
-			justify-content: space-between;
-		}
-
-		.coach-view {
-			width: 50%;
-			border-radius: 5px;
-			margin: 10px 5px 0px 5px;
-			overflow: hidden;
-			text-align: center;
-		}
-
-		.coach-num {
-			background-image: url('@/static/images/pages/index/coach_background_color.png');
-			background-size: 100% 100%;
-			color: #ffffff;
-			text-align: center;
-			width: 50px;
-			margin-left: auto;
-			font-size: 12px;
-			padding: 8px 3px 8px 3px;
-		}
-
-		.coach-num-null {
-			height: 52px;
-		}
-
-		.coach-icon {
-			margin-top: -38px;
-		}
-
-		.coach-icon-img {
-			width: 58px;
-			height: 58px;
-		}
-
-		.icon-background {
-			margin-left: auto;
-			width: 100px;
-			margin-right: -30px;
-			margin-bottom: -40px;
-			margin-top: -26px;
-		}
-
-		.coach-title {
-			margin-top: -80px;
-			height: 35px;
-			font-size: 16px;
-		}
-
-		.iconfont {
-			font-size: 35px;
-			// font-weight: bold;
-		}
-
-		.icon-kecheng {
-			font-size: 80px;
-		}
-
-		.gradient-text {
-			text-align: left;
-			text-indent: 30px;
-			line-height: 50px;
-			font-size: 40px;
-			position: relative;
-		}
-
-		.coach-confirm {
-			background: #c1e4f8;
-			.icon-icon- {
-				color: #2999ff;
-				font-size: 35px;
-			}
-			.icon-kecheng-confirm {
-				color: #acdcf9;
-			}
-			.gradient-text-confirm {
-				// background-image: -webkit-linear-gradient(top, #35b0ff, #024cff);
-				// -webkit-background-clip: text;
-				// -webkit-text-fill-color: transparent;
-			}
-		}
-
-		.coach-teach {
-			background: #ffd9c2;
-			.icon-kecheng-teach {
-				color: #fdcbac;
-			}
-			.gradient-text-teach {
-				background-image: -webkit-linear-gradient(top, #fb9f00, #e36b24);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-			}
-		}
-
-		.coach-end {
-			background: #c4ffdc;
-			.icon-kecheng-end {
-				color: #aef4ca;
-			}
-			.gradient-text-end {
-				background-image: -webkit-linear-gradient(top, #07d158, #00913a);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-			}
-		}
-
-		.coach-lesson {
-			background: #dedeff;
-			.icon-kecheng-lesson {
-				color: #c9d1ff;
-			}
-			.gradient-text-lesson {
-				background-image: -webkit-linear-gradient(top, #941edb, #941edb);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-			}
-		}
-	}
-
-	.view-activity-swiper {
-		padding: 0px 15px 0px 15px;
-		.view-activity-image {
-			width: calc(100%);
-			height: calc(100%);
-			display: block;
-			.activity-image {
-				height: 100%;
-				width: 100%;
-				border-radius: 12px;
-				overflow: hidden;
-			}
-		}
-	}
+	background-color: #efefef;
 
 	.view-icon-button {
 		display: flex;
@@ -687,9 +357,9 @@ export default {
 	}
 
 	.scenic-event {
-		padding: 7px 20px 7px 30px;
+		padding: 7px 15px 7px 15px;
 		font-size: 13px;
-		color: #383838;
+		color: #ff0000;
 		border-bottom: 1px solid #dbdbdb;
 		display: flex;
 		justify-content: space-between;
@@ -699,7 +369,34 @@ export default {
 		.icon-gonggao {
 			margin-right: 5px;
 			font-size: 14px;
-			color: #fc9907;
+			color: #ff0000;
+		}
+	}
+
+	.scenic-ext {
+		padding: 13px 15px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background-color: #ffffff;
+
+		&-title {
+			font-size: 15px;
+
+			span {
+				margin-right: 5px;
+			}
+		}
+
+		&-word {
+			margin-top: 8px;
+			line-height: 13px;
+			font-size: 12px;
+			color: #999;
+		}
+
+		.iconfont {
+			font-size: 14px;
 		}
 	}
 
@@ -722,25 +419,94 @@ export default {
 			font-size: 14px;
 		}
 	}
+
+	.view-introduction {
+		display: flex;
+		padding: 13px 15px;
+		justify-content: space-between;
+		font-size: 15px;
+		background-color: #fff;
+		.introduction-active {
+			display: flex;
+			justify-content: space-between;
+			// align-items: center;
+			color: #999;
+			.icon-arrow {
+				font-size: 20px;
+			}
+		}
+	}
+	.view-categorys {
+		.view-category {
+			margin-top: 10px;
+			background: #fff;
+			.category-header {
+				display: flex;
+				padding: 8px 15px;
+				border-bottom: 1px solid #dbdbdb;
+				font-size: 17px;
+				align-items: center;
+				.icon-menpiao {
+					padding: 1px 3px 0px 3px;
+					background-color: #ff7d13;
+					border-radius: 25px;
+					line-height: 1.5;
+					color: #ffffff;
+					font-size: 12px;
+					height: 19px;
+					margin-right: 7px;
+				}
+			}
+			.category-body {
+				.view-items {
+					padding: 10px 13px 10px 0px;
+					margin-left: 15px;
+					display: flex;
+					justify-content: space-between;
+					border-bottom: 1px solid #dbdbdb;
+					.item-content {
+						.item-name {
+							margin-bottom: 5px;
+							padding-right: 0;
+							line-height: 18px;
+							font-size: 14px;
+							color: #000;
+							text-overflow: ellipsis;
+							overflow: hidden;
+						}
+						.item-status {
+							color: #099fde;
+							font-size: 11px;
+							padding: 0px 0px 7px 0px;
+						}
+						.item-explain {
+							font-size: 12px;
+							color: #999;
+							height: 21px;
+							line-height: 21px;
+						}
+					}
+					.item-active {
+						.view-price {
+							font-size: 20px;
+							font-style: normal;
+							color: #f40;
+							text-align: right;
+							overflow: hidden;
+							word-break: break-all;
+							font-weight: 400;
+							.text-price {
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 </style>
 
 <style>
-/* .color-swiper{
-	height: 173px
-} */
-.tui-swiper {
-	font-size: 26rpx;
-	height: 60rpx;
-	flex: 1;
-	padding-left: 12rpx;
-}
-
-.tui-swiper-item {
-	display: flex;
-	align-items: center;
-}
-
 .tui-banner-box {
 	width: 100%;
 	/* padding: 0 30rpx; */
@@ -753,15 +519,15 @@ export default {
 }
 
 .tui-slide-image {
-	width: calc(100% - 60rpx);
-	height: 148px;
+	width: 100%;
+	height: 100%;
 	display: block;
-	padding: 16rpx 30rpx 0px 30rpx;
+	/* padding: 16rpx 30rpx 0px 30rpx; */
 }
 
 .tui-banner-swiper {
 	width: 100%;
-	height: 210px;
+	height: 100%;
 	/* border-radius: 12rpx; */
 	overflow: hidden;
 	transform: translateY(0);
@@ -820,21 +586,4 @@ export default {
 }
 
 /* #endif */
-
-.tui-activity-box {
-	height: 156rpx;
-}
-
-.tui-activity-swiper {
-	height: 156rpx;
-	border-radius: 20rpx;
-}
-
-.view-module {
-	height: 400rpx;
-}
-
-.coach-view {
-	height: 200rpx;
-}
 </style>
