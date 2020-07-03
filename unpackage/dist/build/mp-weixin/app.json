@@ -1,27 +1,22 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/order/order",
-    "pages/member/member-center"
-  ],
-  "subPackages": [{
-    "root": "packageA",
-    "pages": [
     "pages/ticket/buy-ticket",
-    "pages/ticket/ticket-type",
-
-    "pages/member/course-search",
+    "pages/order/order",
+    "pages/member/member-center",
     "pages/member/my-integral",
-    "pages/member/message-list",
+    "pages/member/bind-member",
+    "pages/member/regist-member",
+    "pages/member/my-card",
+    "pages/member/game-currency",
+    "pages/member/edit-data",
     "pages/payment/wx-js-pay",
-    "pages/order/order-detail",
-    "pages/member/my-ticket",
-    "pages/member/enroll-face"
-    ]
-  }],
+    "pages/order/order-detail"
+  ],
+  "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "冰块管理系统",
+    "navigationBarTitleText": "不一样的星球",
     "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#FFFFFF"
   },

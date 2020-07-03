@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "提交订单",
+  "usingComponents": {
+    "custom-date-selector": "/components/custom/custom-date-selector/custom-date-selector",
+    "tui-numberbox": "/components/thorui/tui-numberbox/tui-numberbox",
+    "custom-field": "/components/custom/custom-field/custom-field",
+    "ticket-type-description": "/components/ticket/ticket-type-description/ticket-type-description",
+    "uni-popup": "/components/uni/uni-popup/uni-popup"
+  }
+}

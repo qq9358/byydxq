@@ -270,6 +270,7 @@ export default {
 				await this.generateQRCodeAsync(order);
 
 				this.orderInfo = order;
+				console.log(orderInfo);
 			} catch (err) {
 				return;
 			} finally {

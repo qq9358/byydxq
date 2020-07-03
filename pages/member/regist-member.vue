@@ -1,8 +1,9 @@
 <template>
 	<view class="view-regist-member">
-		<view class="view-regist-input"><custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" v-model="param.vmodel" @end="onEndClick(param)"></custom-field></view>
+		<view class="view-regist-input"><custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" @end="onEndClick(param)"></custom-field></view>
 		<view class="view-regist-button"><button class="enter-button" @tap="btnRegist">注册</button></view>
 		<view class="view-regist-explain" @click="onBindClick">已有会员<text class="link-text">点击</text>绑定</view>
+		<tui-modal :show="showModal" @click="modalClick" @cancel="modalClick" :title="'温馨提示'" content="会员注册成功！" :button="modalButton"></tui-modal>
 	</view>
 </template>
 
@@ -20,7 +21,8 @@ export default {
 					vmodel: '',
 					placeholder: '请输入姓名',
 					error: false,
-					validTypeId: 6
+					validTypeId: 6,
+					disabled: true
 				},
 				{
 					label: '性别',
@@ -34,7 +36,8 @@ export default {
 							value: '2'
 						}
 					],
-					validTypeId: 2
+					validTypeId: 2,
+					disabled: true
 				},
 				{
 					label: '出生日期',
@@ -49,21 +52,24 @@ export default {
 						}
 					],
 					placeholder: '请选择出生日期',
-					validTypeId: 8
+					validTypeId: 8,
+					disabled: true
 				},
 				{
 					label: '详细地址',
 					vmodel: '',
 					placeholder: '请输入详细地址',
 					error: false,
-					validTypeId: 6
+					validTypeId: 6,
+					disabled: true
 				},
 				{
 					label: '手机号码',
 					vmodel: '',
 					placeholder: '请输入手机号码',
 					error: false,
-					validTypeId: 3
+					validTypeId: 3,
+					disabled: true
 				},
 				{
 					label: '验证码',
@@ -72,7 +78,15 @@ export default {
 					error: false,
 					validTypeId: 6,
 					endTypeId: 1,
-					endValue: '验证码'
+					endValue: '验证码',
+					disabled: true
+				}
+			],
+			showModal: false,
+			modalButton: [
+				{
+					text: '确定',
+					type: 'red'
 				}
 			]
 		};
@@ -102,19 +116,23 @@ export default {
 			}
 		},
 		btnRegist(){
-			let errorMsg = this.validParams();
+			// let errorMsg = this.validParams();
+			let errorMsg = "";
 			if(errorMsg){
 				toastHelper.noneToast(errorMsg);
 			} else {
-				toastHelper.noneToast('注册成功');
-				uni.navigateBack({
-					delta: 1
-				});
+				this.showModal = true;
 			}
 		},
 		onBindClick(){
 			uni.redirectTo({
 				url: '/pages/member/bind-member'
+			});
+		},
+		modalClick(){
+			this.showModal = false;
+			uni.navigateBack({
+				delta: 1
 			});
 		}
 	}

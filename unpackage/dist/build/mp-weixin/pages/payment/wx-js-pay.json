@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "订单支付",
+  "usingComponents": {
+    "tui-modal": "/components/thorui/tui-modal/tui-modal"
+  }
+}

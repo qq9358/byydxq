@@ -2,7 +2,7 @@
 	<uni-popup ref="popup" type="bottom" @change="onPopupChange">
 		<view class="view-popup description">
 			<view class="description-title">
-				<view class="title-icon"><text class="iconfont icon-bingbao"></text></view>
+				<view class="title-icon"><text class="iconfont icon-menpiao"></text></view>
 				<view class="title-text">{{ ticketTypeName }}</view>
 				<view class="description-close-btn" @click="onPopupChange(false)"><text class="iconfont icon-cuowu"></text></view>
 			</view>

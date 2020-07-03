@@ -7,24 +7,27 @@
 			<view class="input-view">
 				<input
 					v-if="param.validTypeId == 6"
-					v-model="vmodel"
+					v-model="param.vmodel"
 					:placeholder="param.placeholder"
 					:placeholder-class="param.error ? 'error-input-placeholder' : 'input-placeholder'"
 					type="text"
+					:disabled="disabled"
 				/>
 				<input
 					v-if="param.validTypeId == 5 || param.validTypeId == 7"
-					v-model="vmodel"
+					v-model="param.vmodel"
 					:placeholder="param.placeholder"
 					:placeholder-class="param.error ? 'error-input-placeholder' : 'input-placeholder'"
 					type="digit"
+					:disabled="disabled"
 				/>
 				<input
 					v-if="param.validTypeId == 3 || param.validTypeId == 4"
-					v-model="vmodel"
+					v-model="param.vmodel"
 					:placeholder="param.placeholder"
 					:placeholder-class="param.error ? 'error-input-placeholder' : 'input-placeholder'"
 					type="idcard"
+					:disabled="disabled"
 				/>
 			</view>
 			<view class="input-end" v-if="param.endTypeId == '1'" @click="onEndClick">
@@ -62,11 +65,11 @@
 				v-model="param.vmodel"
 			/>
 		</view>
-		<view v-if="param.validTypeId == 8" class="view-input" @click="onTimeClick">
+		<view v-if="param.validTypeId == 8" class="view-input view-date-time">
 			<view class="input-label">{{ param.label }}</view>
-			<view class="picker-view">
-				<view v-if="!vmodel" class="display-text">{{ param.placeholder }}</view>
-				<view v-else :class="{ 'select-text': vmodel, 'display-text': true }">{{ vmodel }}</view>
+			<view class="picker-view" @click="onTimeClick">
+				<view v-if="!param.vmodel" class="display-text">{{ param.placeholder }}</view>
+				<view v-else :class="{ 'select-text': param.vmodel, 'display-text': true }">{{ param.vmodel }}</view>
 				<view><view class="iconfont icon-arrow picker-icon"></view></view>
 			</view>
 			<tui-datetime
@@ -120,12 +123,15 @@ export default {
 			default() {
 				return {};
 			}
+		},
+		disabled: {
+			type: Boolean,
+			default: false
 		}
 	},
 	data() {
 		return {
 			showPopup: false,
-			vmodel: '',
 			type: 2,
 			startYear: 1980,
 			endYear: 2030,
@@ -139,8 +145,8 @@ export default {
 	},
 	computed: {
 		currentText() {
-			if (this.value && this.param.paramSelectDtos) {
-				const currentItem = this.param.paramSelectDtos.filter(c => c[this.valueKey] == this.value)[0];
+			if (this.param.vmodel && this.param.paramSelectDtos) {
+				const currentItem = this.param.paramSelectDtos.filter(c => c[this.valueKey] == this.param.vmodel)[0];
 				if (currentItem) {
 					return currentItem[this.textKey];
 				}
@@ -148,11 +154,11 @@ export default {
 			return '';
 		}
 	},
-	watch: {
-		vmodel(val) {
-			this.$emit('input', val);
-		}
-	},
+	// watch: {
+	// 	vmodel(val) {
+	// 		this.$emit('input', val);
+	// 	}
+	// },
 	methods: {
 		onFocus() {
 			document.activeElement.blur();
@@ -160,22 +166,30 @@ export default {
 		onClick() {},
 		onCancel() {},
 		onConfirm(value) {
-			// this.$emit("input", value[this.valueKey]);
-			console.log(value);
-			this.vmodel = value[this.valueKey];
+			// this.vmodel = value[this.valueKey];
+			this.param.vmodel = value[this.valueKey];
 			this.showPopup = false;
 		},
 		onEndClick() {
 			this.$emit('end', {});
 		},
 		onRadioChange(res) {
-			this.$emit('input', res.detail.value);
+			// this.$emit('input', res.detail.value);
+			this.param.vmodel = res.detail.value;
 		},
 		onTimeClick() {
+			this.cancelColor = '#888';
+			this.color = '#5677fc';
+			this.setDateTime = '';
+			this.startYear = 1980;
+			this.endYear = 2030;
+			this.unitTop = false;
+			this.radius = false;
 			this.$refs.dateTime.show();
 		},
 		timeChange: function(e) {
-			this.vmodel = e.result;
+			// this.vmodel = e.result;
+			this.param.vmodel = e.result;
 		}
 	}
 };
@@ -183,6 +197,7 @@ export default {
 
 <style lang="scss">
 .view-radio {
+	padding: 5px 16px 5px 0px;
 	.radio-view {
 		.radio-group {
 			display: flex;
@@ -195,6 +210,7 @@ export default {
 
 .view-radio-alone {
 	display: block;
+	padding: 5px 16px 5px 0px;
 	.radio-alone-view {
 		.radio-group-alone {
 			.tui-radio-alone {
@@ -216,6 +232,10 @@ export default {
 
 .input-end {
 	color: #19a0f0;
+}
+
+.view-date-time {
+	padding: 8px 16px 8px 0px;
 }
 </style>
 

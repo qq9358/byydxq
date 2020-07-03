@@ -86,9 +86,6 @@ import ticketTypeService from './../../services/ticketTypeService.js';
 import scenicService from './../../services/scenicService.js';
 import settingService from './../../services/settingService.js';
 import memberService from '@/services/memberService.js';
-import iSwiperOne from '@/static/images/pages/index/index_swiper_one.png';
-import iSwiperTwo from '@/static/images/pages/index/index_swiper_two.png';
-import iSwiperThree from '@/static/images/pages/index/index_swiper_three.png';
 
 const today = dayjs();
 const tomorrow = dayjs().addDays(1);
@@ -144,7 +141,6 @@ export default {
 					]
 				}
 			],
-			images: [iSwiperOne, iSwiperTwo, iSwiperThree],
 			scenic: {},
 			ticketTypes: [],
 			selectedTicketType: {},
@@ -159,7 +155,8 @@ export default {
 			showStudent: true,
 			showIntroduction: false,
 			showMemberSelect: false,
-			memberSelect: false
+			memberSelect: false,
+			images: []
 		};
 	},
 	async onLoad() {

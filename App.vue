@@ -74,9 +74,3 @@ export default {
 	}
 };
 </script>
-
-<style>
-/* #ifndef APP-NVUE */
-@import './components/uni/uParse/src/wxParse.css';
-/* #endif */
-</style>

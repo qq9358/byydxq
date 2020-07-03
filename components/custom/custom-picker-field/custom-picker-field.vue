@@ -1,22 +1,6 @@
 <template>
 	<view class="view-input" >
 		<text class="picker-label">{{ label }}</text>
-		<!-- <input v-if="isCell" :title="label" is-link :value="currentText ? currentText : placeholder" @click="onClick" />
-		<input v-else :label="label" :value="currentText" :placeholder="placeholder" right-icon="arrow" readonly @focus="onFocus" @click="onClick" /> -->
-		<!-- <tui-bottom-popup ref="pickerPopup" position="bottom"> -->
-		<!-- <picker
-				show-toolbar
-				:columns="columns"
-				:loading="loading"
-				:value-key="textKey"
-				@cancel="onCancel"
-				@confirm="onConfirm"
-				@change="pickerChange"
-				:value="index"
-				:range="columns"
-			>
-				<view class="tui-input">{{ columns[index] }}</view>
-			</picker> -->
 		<picker v-if="pickerType == 1" @change="pickerChange" :value="selectValue" :range="columns" range-key="displayText">
 			<view class="picker-view">
 				<view v-if="selectValue == undefined" class="display-text">{{ placeholder }}</view>
@@ -24,7 +8,6 @@
 				<view><view class="iconfont icon-arrow picker-icon"></view></view>
 			</view>
 		</picker>
-		<!-- </tui-bottom-popup> -->
 	</view>
 </template>
 

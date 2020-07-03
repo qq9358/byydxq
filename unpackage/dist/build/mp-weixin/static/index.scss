@@ -1,4 +1,122 @@
-.tui-modal .tui-modal__bd{
+
+
+	.view-integral-list {
+		margin-top: 10px;
+		background: #ffffff;
+		.integral-list-item {
+			display: flex;
+			padding: 5px 15px 5px 15px;
+			border-bottom: 1px solid #efefef;
+			margin: 5px 10px 5px 10px;
+			.list-item-icon {
+				padding: 20px 20px 20px 20px;
+				width: 23px;
+				height: 23px;
+				.item-icon-view {
+					background: #fe7c18;
+					border-radius: 50%;
+					padding: 11px 11px 11px 11px;
+					width: 100%;
+					height: 100%;
+					.item-icon-img {
+						height: 100%;
+						width: 100%;
+					}
+				}
+			}
+			.list-item-content {
+				border-bottom: 1px solid #dbdbdb;
+				padding: 20px 20px 20px 0px;
+				width: calc(100% - 97px);
+				margin-left: 24px;
+				display: flex;
+				justify-content: space-between;
+				.item-content-text {
+					.content-text-purpose {
+						font-size: 15px;
+					}
+					.content-text-ctime {
+						font-size: 13px;
+						color: #999999;
+						padding: 5px 0px 0px 0px;
+					}
+				}
+			}
+			.list-item-value {
+				.item-value-positive {
+					color: #fe7418;
+				}
+				.item-value-negative {
+					color: #424242;
+				}
+			}
+		}
+		.integral-list-title {
+			padding: 15px 0px 5px 15px;
+			font-weight: bold;
+		}
+		.integral-list-head {
+			display: flex;
+			border: 1px solid #e8e8e8;
+			background: #f5f4f4;
+			padding: 5px 17px 5px 20px;
+			margin: 3px 5px 3px 5px;
+			border-radius: 15px;
+		}
+		.integral-col-ctime {
+			width: 45%;
+		}
+		.integral-col-type {
+			width: 15%;
+		}
+		.integral-col-value {
+			width: 15%;
+
+			text-align: right;
+		}
+		.integral-col-surplus {
+			width: 25%;
+
+			text-align: right;
+		}
+		.integral-col-num {
+		}
+	}
+
+view{
+	font-size: 14px;
+}
+
+.picker-label {
+	width: 90px;
+}
+
+.link-text {
+	color: #19a0f0;
+}
+
+.picker-view {
+	display: flex;
+	align-items: center;
+	color: #969799;
+	.display-text {
+		width: calc(100vw - 162px);
+	}
+	.select-text {
+		color: #333;
+	}
+	.picker-icon {
+		font-size: 22px;
+	}
+}
+
+.enter-button {
+	background: #19a0f0;
+	padding: 10px 6px 10px 6px;
+	border-radius: 5px;
+}
+
+.tui-modal .tui-modal__bd {
 	color: #333;
 }
 
@@ -11,8 +129,16 @@
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid #efefef;
+	font-size: 14px;
 	.input-label {
-		width: 96px;
+		width: 56px;
+		padding: 0px 34px 0px 0px;
+		text-align-last: justify;
+		text-align: justify;
+		text-justify: distribute-all-lines; // 这行必加，兼容ie浏览bai器
+	}
+	.input-end {
+		margin-left: auto;
 	}
 }
 
@@ -495,7 +621,7 @@ button {
 	padding: 5px 8px;
 }
 
-tui-button[type=primary][plain]{
+tui-button[type='primary'][plain] {
 	color: #19a0f0;
 	border-color: #19a0f0;
 }
@@ -529,8 +655,6 @@ button::after {
 	overflow: visible;
 }
 
-
-
 .tui-opcity {
 	opacity: 0.5;
 }
@@ -544,8 +668,6 @@ button::after {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-
-
 
 /*按钮样式*/
 

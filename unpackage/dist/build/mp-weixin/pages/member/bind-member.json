@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员绑定",
+  "usingComponents": {
+    "custom-field": "/components/custom/custom-field/custom-field"
+  }
+}

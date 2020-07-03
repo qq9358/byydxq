@@ -1,6 +1,6 @@
 <template>
 	<view class="view-regist-member">
-		<view class="view-regist-input"><custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" v-model="param.vmodel" @end="onEndClick(param)"></custom-field></view>
+		<view class="view-regist-input"><custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" @end="onEndClick(param)"></custom-field></view>
 		<view class="view-regist-button"><button class="enter-button" @tap="btnBind">立即绑定</button></view>
 	</view>
 </template>

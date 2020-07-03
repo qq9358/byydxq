@@ -1,0 +1,1 @@
+.view-game-integral{background:#f0f0f0}.view-game-integral .view-integral-info{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-box-pack:center;-webkit-justify-content:center;justify-content:center;background:#fff;padding:25px 35px 15px 25px}.view-game-integral .view-integral-info .integral-info-num{color:#127d11;font-size:20px;margin-top:-7px}

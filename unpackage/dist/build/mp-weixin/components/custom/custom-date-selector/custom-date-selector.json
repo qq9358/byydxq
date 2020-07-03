@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "uni-popup": "/components/uni/uni-popup/uni-popup",
+    "custom-calendar": "/components/custom/custom-calendar/custom-calendar"
+  },
+  "component": true
+}

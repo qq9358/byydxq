@@ -9,68 +9,31 @@
 		</view>
 
 		<view class="view-cell">
-			<view class="icon-vertical-center" @click="onMyTicket">
-				<view class="title-icon"><view class="iconfont icon-menpiao"></view></view>
-				<view class="title-text">我的门票</view>
+			<view class="icon-vertical-center" @click="onMyCard">
+				<view class="title-icon"><view class="iconfont icon-huiyuanka"></view></view>
+				<view class="title-text">我的会员卡</view>
 				<view class="title-arrow"><view class="iconfont icon-arrow"></view></view>
 			</view>
-			<view class="icon-vertical-center" @click="onMyFace">
-				<view class="title-icon"><view class="iconfont icon-face"></view></view>
-				<view class="title-text">登记人脸</view>
+			<view class="icon-vertical-center" @click="onMyIntegral">
+				<view class="title-icon"><view class="iconfont icon-jifen"></view></view>
+				<view class="title-text">我的积分</view>
 				<view class="title-arrow"><view class="iconfont icon-arrow"></view></view>
 			</view>
-			<!-- <view
-				v-permission="[permissions.TMSWeChat_CheckTicket]"
-				title="门票核销"
-				is-link
-				icon="yanpiao"
-				to="/CheckTicket"
-				class="icon-vertical-center"
-			  />
-			  <view
-				v-permission="[permissions.TMSWeChat_QueryTicket]"
-				title="门票查询"
-				is-link
-				icon="search"
-				to="/QueryTicket"
-			  />
-			  <view
-				v-permission="[permissions.TMSWeChat_Distribution]"
-				title="分销平台"
-				is-link
-				icon="apps-o"
-				to="/Distribution"
-			  />
-			  <view
-				v-permission="[permissions.TMSWeChat_TicketSaleStat]"
-				title="售票统计"
-				is-link
-				icon="tongji"
-				to="/TicketSaleStat"
-				class="icon-vertical-center"
-			  />
-			  <view
-				v-permission="[permissions.TMSWeChat_TradeStat]"
-				title="收入汇总"
-				is-link
-				icon="tongji"
-				to="/TradeStat"
-				class="icon-vertical-center"
-			  />
-			  <view
-				v-permission="[permissions.TMSWeChat_TicketCheckStat]"
-				title="检票统计"
-				is-link
-				icon="tongji"
-				to="/TicketCheckStat"
-				class="icon-vertical-center"
-			  /> -->
+			<view class="icon-vertical-center" @click="onMyGameCurrency">
+				<view class="title-icon"><view class="iconfont icon-currency"></view></view>
+				<view class="title-text">我的游戏币</view>
+				<view class="title-arrow"><view class="iconfont icon-arrow"></view></view>
+			</view>
+			<view class="icon-vertical-center" @click="onEditData">
+				<view class="title-icon"><view class="iconfont icon-edit"></view></view>
+				<view class="title-text">修改资料</view>
+				<view class="title-arrow"><view class="iconfont icon-arrow"></view></view>
+			</view>
 		</view>
 	</div>
 </template>
 
 <script>
-import defaultHeadImg from '@/static/image/portrait_bg.png';
 import memberService from '@/services/memberService.js';
 
 export default {
@@ -86,14 +49,24 @@ export default {
 		}
 	},
 	methods: {
-		onMyTicket() {
+		onMyCard() {
 			uni.navigateTo({
-				url: '/pages/member/my-ticket'
+				url: '/pages/member/my-card'
 			});
 		},
-		onMyFace() {
+		onMyIntegral() {
 			uni.navigateTo({
-				url: '/pages/member/enroll-face'
+				url: '/pages/member/my-integral'
+			});
+		},
+		onMyGameCurrency(){
+			uni.navigateTo({
+				url: '/pages/member/game-currency'
+			});
+		},
+		onEditData(){
+			uni.navigateTo({
+				url: '/pages/member/edit-data'
 			});
 		}
 	}

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "custom-picker-field": "/components/custom/custom-picker-field/custom-picker-field",
+    "tui-datetime": "/components/thorui/tui-datetime/tui-datetime"
+  },
+  "component": true
+}

@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "tui-bottom-popup": "/components/thorui/tui-bottom-popup/tui-bottom-popup",
-    "calendar": "/components/calendar/calendar"
-  },
-  "component": true
-}

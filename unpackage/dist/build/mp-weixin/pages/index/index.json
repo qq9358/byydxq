@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "notice": "/components/notice/notice"
+    "ticket-notice": "/components/ticket/ticket-notice/ticket-notice",
+    "ticket-introduction": "/components/ticket/ticket-introduction/ticket-introduction",
+    "ticket-type-description": "/components/ticket/ticket-type-description/ticket-type-description",
+    "ticket-member-select": "/components/ticket/ticket-member-select/ticket-member-select"
   }
 }

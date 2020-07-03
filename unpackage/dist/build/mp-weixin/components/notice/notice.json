@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "tui-bottom-popup": "/components/thorui/tui-bottom-popup/tui-bottom-popup"
-  },
-  "component": true
-}

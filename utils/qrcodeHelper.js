@@ -4,10 +4,11 @@ import ajax from "./ajax.js";
 export default {
   async createQRCodeAsync(value) {
     try {
-      return await QRCode.toDataURL(value, {
+      let qrcode = await QRCode.toDataURL(value, {
         width: 200
       });
-    } catch {
+	  return qrcode;
+    } catch(ex){
       const response = await ajax.get(`/common/CreateQRCodeAsync?value=${value}`);
       return response.result;
     }

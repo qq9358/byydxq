@@ -1,0 +1,10 @@
+(global["webpackJsonp"]=global["webpackJsonp"]||[]).push([["components/ticket/ticket-member-select/ticket-member-select"],{2011:function(e,n,t){"use strict";var o=t("2642"),u=t.n(o);u.a},2642:function(e,n,t){},"2f0d":function(e,n,t){"use strict";var o={uniPopup:function(){return Promise.all([t.e("common/vendor"),t.e("components/uni/uni-popup/uni-popup")]).then(t.bind(null,"6d09"))}},u=function(){var e=this,n=e.$createElement;e._self._c},i=[];t.d(n,"b",(function(){return u})),t.d(n,"c",(function(){return i})),t.d(n,"a",(function(){return o}))},d893:function(e,n,t){"use strict";t.r(n);var o=t("eb5f"),u=t.n(o);for(var i in o)"default"!==i&&function(e){t.d(n,e,(function(){return o[e]}))}(i);n["default"]=u.a},e19d:function(e,n,t){"use strict";t.r(n);var o=t("2f0d"),u=t("d893");for(var i in u)"default"!==i&&function(e){t.d(n,e,(function(){return u[e]}))}(i);t("2011");var r,c=t("f0c5"),a=Object(c["a"])(u["default"],o["b"],o["c"],!1,null,null,null,!1,o["a"],r);n["default"]=a.exports},eb5f:function(e,n,t){"use strict";(function(e){Object.defineProperty(n,"__esModule",{value:!0}),n.default=void 0;var t={name:"notice",props:{value:{type:Boolean,default:!1}},data:function(){return{showPopup:!1}},watch:{value:function(e){e?this.$refs.popup.open():this.$refs.popup.close()}},methods:{onPopupChange:function(e){e.show||this.$emit("input",!1)},btnBindMember:function(){this.onClose(),e.navigateTo({url:"/pages/member/bind-member"})},btnRegistMember:function(){this.onClose(),e.navigateTo({url:"/pages/member/regist-member"})},onClose:function(){this.$emit("close",{})}}};n.default=t}).call(this,t("543d")["default"])}}]);
+;(global["webpackJsonp"] = global["webpackJsonp"] || []).push([
+    'components/ticket/ticket-member-select/ticket-member-select-create-component',
+    {
+        'components/ticket/ticket-member-select/ticket-member-select-create-component':(function(module, exports, __webpack_require__){
+            __webpack_require__('543d')['createComponent'](__webpack_require__("e19d"))
+        })
+    },
+    [['components/ticket/ticket-member-select/ticket-member-select-create-component']]
+]);

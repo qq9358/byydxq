@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "会员注册",
+  "usingComponents": {
+    "custom-field": "/components/custom/custom-field/custom-field",
+    "tui-modal": "/components/thorui/tui-modal/tui-modal"
+  }
+}

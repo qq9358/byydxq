@@ -148,7 +148,7 @@
 			@close="onDescriptionClose"
 		/>
 
-		<tui-bottom-popup ref="touristPopup" v-if="ticketType.touristInfoType == 3" position="right">
+		<uni-popup ref="touristPopup" v-if="ticketType.touristInfoType == 3" position="right">
 			<view class="booking-tourist-edit">
 				<van-nav-bar :title="`${editTouristTitle}出行人`" left-text="返回" left-arrow @click-left="showTourist = false" />
 				<view class="booking-tourist-edit-content">
@@ -160,7 +160,7 @@
 					<view class="booking-tourist-edit-btnbox"><van-button @click="onTouristSave">完成</van-button></view>
 				</view>
 			</view>
-		</tui-bottom-popup>
+		</uni-popup>
 	</view>
 </template>
 

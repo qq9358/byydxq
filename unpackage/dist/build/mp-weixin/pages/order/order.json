@@ -1,8 +1,8 @@
 {
   "navigationBarTitleText": "我的订单",
   "usingComponents": {
-    "s-tabs": "/components/s-tabs/s-tabs",
-    "s-tab": "/components/s-tab/s-tab",
-    "no-data": "/components/no-data/no-data"
+    "custom-tabs": "/components/custom/custom-tabs/custom-tabs",
+    "custom-tab": "/components/custom/custom-tab/custom-tab",
+    "custom-no-data": "/components/custom/custom-no-data/custom-no-data"
   }
 }

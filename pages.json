@@ -12,13 +12,6 @@
 			"navigationBarTitleText": "提交订单"
 		}
 	}, {
-		"path": "pages/ticket/ticket-type",
-		"style": {
-			"app-plus": {
-				"titleNView": false
-			}
-		}
-	},{
 		"path": "pages/order/order",
 		"style": {
 			"navigationBarTitleText": "我的订单"
@@ -31,21 +24,13 @@
 			}
 		}
 	},{
-		"path": "pages/member/course-search",
-		"style": {
-			"navigationBarTitleText": "上课记录查询"
-		}
-	},{
 		"path": "pages/member/my-integral",
 		"style": {
-			"navigationBarTitleText": "我的积分"
+			"navigationBarTitleText": "我的积分",
+			"navigationBarBackgroundColor":"#19a0f0",
+			"navigationBarTextStyle": "white"
 		}
 	},{
-		"path": "pages/member/message-list",
-		"style": {
-			"navigationBarTitleText": "消息列表"
-		}
-	}, {
 		"path": "pages/member/bind-member",
 		"style": {
 			"navigationBarTitleText": "会员绑定"
@@ -54,6 +39,23 @@
 		"path": "pages/member/regist-member",
 		"style": {
 			"navigationBarTitleText": "会员注册"
+		}
+	},{
+		"path": "pages/member/my-card",
+		"style": {
+			"navigationBarTitleText": "我的会员卡"
+		}
+	}, {
+		"path": "pages/member/game-currency",
+		"style": {
+			"navigationBarTitleText": "我的游戏币",
+			"navigationBarBackgroundColor":"#19a0f0",
+			"navigationBarTextStyle": "white"
+		}
+	}, {
+		"path": "pages/member/edit-data",
+		"style": {
+			"navigationBarTitleText": "修改资料"
 		}
 	},{
 		"path": "pages/payment/wx-js-pay",
@@ -67,18 +69,6 @@
 			"enablePullDownRefresh": true,
 			"navigationBarBackgroundColor":"#19a0f0",
 			"navigationBarTextStyle": "white"
-		}
-	}, {
-		"path": "pages/member/my-ticket",
-		"style": {
-			"navigationBarTitleText": "我的门票",
-			"enablePullDownRefresh": true
-		}
-	}, {
-		"path": "pages/member/enroll-face",
-		"style": {
-			"navigationBarTitleText": "登记人脸",
-			"enablePullDownRefresh": true
 		}
 	}],
 	"easycom": {

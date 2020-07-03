@@ -6,6 +6,83 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2766672",
+      "name": "Member",
+      "font_class": "Member",
+      "unicode": "e65d",
+      "unicode_decimal": 58973
+    },
+    {
+      "icon_id": "191591",
+      "name": "edit",
+      "font_class": "edit",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "6656712",
+      "name": "integral",
+      "font_class": "jifen",
+      "unicode": "e685",
+      "unicode_decimal": 59013
+    },
+    {
+      "icon_id": "12042841",
+      "name": "currency",
+      "font_class": "currency",
+      "unicode": "e6f4",
+      "unicode_decimal": 59124
+    },
+    {
+      "icon_id": "1667263",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "4766451",
+      "name": "mobile",
+      "font_class": "mobile",
+      "unicode": "e7b2",
+      "unicode_decimal": 59314
+    },
+    {
+      "icon_id": "5326818",
+      "name": "key",
+      "font_class": "key",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "12004542",
+      "name": "Contact book",
+      "font_class": "Contactbook",
+      "unicode": "ea9c",
+      "unicode_decimal": 60060
+    },
+    {
+      "icon_id": "14009239",
+      "name": "日历",
+      "font_class": "rili",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "15167607",
+      "name": "sex",
+      "font_class": "sex",
+      "unicode": "e653",
+      "unicode_decimal": 58963
+    },
+    {
+      "icon_id": "982336",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
       "icon_id": "6044896",
       "name": "angle",
       "font_class": "angle",
