@@ -59,6 +59,32 @@ export default {
 			id: id
 		});
 	},
+	async validRepeatMobileAsync(mobile) {
+		const response = await ajax.post(`/member/ValidRepeatMobileAsync?mobile=${mobile}`);
+		return response.result;
+	},
+	async bindFromWeChatAsync(input) {
+		let response = await ajax.post('/member/BindFromWeChatAsync', input);
+		if (!response.result.error) {
+			this.setMember(response);
+		}
+		return response.result;
+	},
+	async registFromWeChatAsync(input) {
+		let response = await ajax.post('/member/RegistFromWeChatAsync', input);
+		if (!response.result.error) {
+			this.setMember(response);
+		}
+		return response.result;
+	},
+	async bindSendVerificationCodeAsync(mobile) {
+		const response = await ajax.post(`/member/BindSendVerificationCodeAsync?mobile=${mobile}`);
+		return response.result;
+	},
+	async registSendVerificationCodeAsync(mobile) {
+		const response = await ajax.post(`/member/RegistSendVerificationCodeAsync?mobile=${mobile}`);
+		return response.result;
+	},
 	setMember(response) {
 		let member = response.result.member;
 		member.permissions = response.result.permissions;

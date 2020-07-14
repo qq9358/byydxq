@@ -1,7 +1,10 @@
 <template>
 	<view class="view-regist-member">
-		<view class="view-regist-input"><custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" @end="onEndClick(param)"></custom-field></view>
-		<view class="view-regist-button"><button class="enter-button" @tap="btnBind">立即绑定</button></view>
+		<view class="view-regist-input">
+			<custom-field v-for="(param, paramIndex) in params" :key="paramIndex" :param="param" @end="onEndClick(param)">
+			</custom-field>
+		</view>
+		<view class="view-regist-button"><button class="enter-button" @tap="btnBind" :loading="isLoading">立即绑定</button></view>
 	</view>
 </template>
 
@@ -9,8 +12,12 @@
 import validate from '@/utils/validator.js';
 import validRules from '@/utils/validRules.js';
 import toastHelper from '@/utils/toastHelper.js';
+import memberService from '@/services/memberService.js';
+import commonService from '@/services/commonService.js';
+import { mobileMixin } from '@/mixins/mobileMixin.js';
 
 export default {
+	mixins: [mobileMixin],
 	data() {
 		return {
 			params: [
@@ -27,45 +34,75 @@ export default {
 					placeholder: '请输入验证码',
 					error: false,
 					validTypeId: 6,
-					endTypeId: 1,
-					endValue: '验证码'
+					endTypeId: 4,
+					endValue: '验证码',
+					isCountdownStart: false,
+					second: 60
 				}
-			]
+			],
+			timer: -1
 		};
 	},
 	methods: {
 		validParams() {
+			let errorMsg = '';
 			for (let i = 0; i < this.params.length; i++) {
 				let param = this.params[i];
-				const rules = validRules.getValidRules(param);
-				let result = validate([
-					{
-						value: param.vmodel,
-						name: param.label,
-						rules: rules
+				errorMsg += validRules.validParam(param);
+			}
+			return errorMsg;
+		},
+		async onEndClick(param) {
+			if (param.label == '验证码') {
+				if (!this.params[1].isCountdownStart) {
+					let errorMsg = validRules.validParam(this.params[0]);
+
+					if (errorMsg) {
+						toastHelper.noneToast(errorMsg);
+					} else {
+						// try {
+						// 	this.isCodeLoading = true;
+						// 	const sendResult = await memberService.bindSendVerificationCodeAsync(this.params[0].vmodel);
+						// 	if (sendResult) {
+						// 		toastHelper.noneToast(sendResult);
+						// 	} else {
+						// 		this.params[1].isCountdownStart = true;
+						// 		this.params[1].second--;
+						// 		this.timer = setInterval(() => {
+						// 			this.params[1].second--;
+						// 			if (this.params[1].second <= 0) {
+						// 				this.params[1].isCountdownStart = false;
+						// 				clearInterval(this.timer);
+						// 				this.params[1].second = 60;
+						// 			}
+						// 		}, 1000);
+						// 	}
+						// } finally {
+						// }
 					}
-				]);
-				param.error = !result.success;
-				if (!result.success) {
-					return result.message;
 				}
 			}
-			return null;
 		},
-		onEndClick(param) {
-			if (param.label == '验证码') {
-				toastHelper.noneToast('获取验证码');
-			}
-		},
-		btnBind(){
+		async btnBind() {
 			let errorMsg = this.validParams();
-			if(errorMsg){
+			if (errorMsg) {
 				toastHelper.noneToast(errorMsg);
 			} else {
-				toastHelper.noneToast('绑定成功');
-				uni.navigateBack({
-					delta: 1
-				});
+				try {
+					// uni.showLoading();
+
+					let bindResult = await memberService.bindFromWeChatAsync({ mobile: this.params[0].vmodel, verificationCode: this.params[1].vmodel });
+					console.log(bindResult);
+					if (!bindResult.error) {
+						uni.navigateBack({
+							delta: 1
+						});
+					} else {
+						toastHelper.noneToast(bindResult.error);
+					}
+				} finally {
+					// uni.hideLoading();
+				}
 			}
 		}
 	}

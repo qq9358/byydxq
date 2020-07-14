@@ -39,6 +39,9 @@
 				</view>
 			</view>
 			<view class="input-end" v-if="param.endTypeId == '3'" @click="onEndClick"><view :class="'iconfont' + param.endValue"></view></view>
+			<view class="input-end" v-if="param.endTypeId == '4'" @click="onEndClick">
+				<button class="code-button">{{ param.isCountdownStart ? param.second + 'S 后重新发送' : param.endValue }}</button>
+			</view>
 		</view>
 		<view v-if="param.validTypeId == 2" class="view-input view-radio">
 			<view class="input-label">{{ param.label }}</view>
@@ -65,7 +68,7 @@
 				v-model="param.vmodel"
 			/>
 		</view>
-		<view v-if="param.validTypeId == 8" class="view-input view-date-time">
+		<view v-if="param.validTypeId == 8" class="view-input">
 			<view class="input-label">{{ param.label }}</view>
 			<view class="picker-view" @click="onTimeClick">
 				<view v-if="!param.vmodel" class="display-text">{{ param.placeholder }}</view>
@@ -197,7 +200,6 @@ export default {
 
 <style lang="scss">
 .view-radio {
-	padding: 5px 16px 5px 0px;
 	.radio-view {
 		.radio-group {
 			display: flex;
@@ -210,7 +212,6 @@ export default {
 
 .view-radio-alone {
 	display: block;
-	padding: 5px 16px 5px 0px;
 	.radio-alone-view {
 		.radio-group-alone {
 			.tui-radio-alone {
@@ -232,10 +233,6 @@ export default {
 
 .input-end {
 	color: #19a0f0;
-}
-
-.view-date-time {
-	padding: 8px 16px 8px 0px;
 }
 </style>
 

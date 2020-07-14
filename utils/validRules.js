@@ -1,3 +1,5 @@
+import validate from './validator.js';
+
 //下拉选项 = 1,单选按钮 = 2,手机号码 = 3,身份证号码 = 4,数值类型 = 5,字符串 = 6,年龄 = 7
 export default {
     getValidRules(activityBindParamDto) {
@@ -45,5 +47,21 @@ export default {
         }
 
         return rules;
-    }
+    },
+	validParam(param){
+		const rules = this.getValidRules(param);
+		let result = validate([
+			{
+				value: param.vmodel,
+				name: param.label,
+				rules: rules
+			}
+		]);
+		param.error = !result.success;
+		if (!result.success) {
+			return result.message;
+		} else {
+			return "";
+		}
+	}
 }

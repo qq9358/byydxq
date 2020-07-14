@@ -11,8 +11,11 @@
 import validate from '@/utils/validator.js';
 import validRules from '@/utils/validRules.js';
 import toastHelper from '@/utils/toastHelper.js';
+import { mobileMixin } from "@/mixins/mobileMixin.js";
+import memberService from "@/services/memberService.js";
 
 export default {
+	mixins: [mobileMixin],
 	data() {
 		return {
 			params: [
